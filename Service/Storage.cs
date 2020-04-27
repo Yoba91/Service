@@ -53,7 +53,7 @@ namespace Service
     #region Отдел (Dept)
     public class Dept
     {
-        Dept(int rowid, String name, String code, String description)
+        public Dept(int rowid, String name, String code, String description)
         {
             RowId = rowid;
             Name = name;
@@ -73,7 +73,7 @@ namespace Service
     #region Ремонтник (Repairer)
     public class Repairer
     {
-        Repairer(int rowid, String name, String surname, String midname, String password)
+        public Repairer(int rowid, String name, String surname, String midname, String password)
         {
             RowId = rowid;
             Name = name;
@@ -95,7 +95,7 @@ namespace Service
     #region Модель устройста (Model)
     public class Model
     {
-        Model(int rowid, String fullName, String shortName, TypeModel type)
+        public Model(int rowid, String fullName, String shortName, TypeModel type)
         {
             RowId = rowid;
             FullName = fullName;
@@ -117,7 +117,7 @@ namespace Service
     #region Тип устройста (TypeModel)
     public class TypeModel
     {
-        TypeModel(int rowid, String fullName, String shortName)
+        public TypeModel(int rowid, String fullName, String shortName)
         {
             RowId = rowid;
             FullName = fullName;
@@ -136,7 +136,7 @@ namespace Service
     #region Устройство (Device)
     public class Device
     {
-        Device(int rowid, Model model, Dept dept, String serialNumber, String inventoryNumber)
+        public Device(int rowid, Model model, Dept dept, String serialNumber, String inventoryNumber)
         {
             RowId = rowid;
             Model = model;
@@ -161,7 +161,7 @@ namespace Service
     #region Журнал сервиса (ServiceLog)
     public class ServiceLog
     {
-        ServiceLog(int rowid, Device device, Date date, Repairer repairer)
+        public ServiceLog(int rowid, Device device, Date date, Repairer repairer)
         {
             RowId = rowid;
             Device = device;
@@ -184,7 +184,7 @@ namespace Service
     #region Параметры устройста (Parameter)
     public class Parameter
     {
-        Parameter(int rowid, String name, String unit, Model model)
+        public Parameter(int rowid, String name, String unit, Model model)
         {
             RowId = rowid;
             Name = name;
@@ -205,7 +205,7 @@ namespace Service
     #region Значения параметров устройста (ParametersValues)
     public class ParametersValues
     {
-        ParametersValues(int rowid, Parameter parameter, ServiceLog serviceLog, String value)
+        public ParametersValues(int rowid, Parameter parameter, ServiceLog serviceLog, String value)
         {
             RowId = rowid;
             Value = value;
@@ -227,7 +227,7 @@ namespace Service
     #region Запчасти (Spares)
     public class Spares
     {
-        Spares(int rowid, String name, String description, Model model)
+        public Spares(int rowid, String name, String description, Model model)
         {
             RowId = rowid;
             Name = name;
@@ -248,7 +248,7 @@ namespace Service
     #region Использованные запчасти (SparesUsed)
     public class SparesUsed
     {
-        SparesUsed(int rowid, ServiceLog serviceLog)
+        public SparesUsed(int rowid, ServiceLog serviceLog)
         {
             RowId = rowid;
             ServiceLog = serviceLog;
@@ -264,7 +264,7 @@ namespace Service
     #region Работы (Service)
     public class Service
     {
-        Service(int rowid, String fullName, String shortName, String description, Model model)
+        public Service(int rowid, String fullName, String shortName, String description, Model model)
         {
             RowId = rowid;
             FullName = fullName;
@@ -287,7 +287,7 @@ namespace Service
     #region Произведенные работы (ServiceDone)
     public class ServiceDone
     {
-        ServiceDone(int rowid, ServiceLog serviceLog)
+        public ServiceDone(int rowid, ServiceLog serviceLog)
         {
             RowId = rowid;
             ServiceLog = serviceLog;
