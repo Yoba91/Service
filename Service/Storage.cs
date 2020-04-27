@@ -9,7 +9,7 @@ namespace Service
     #region Дата нужного формата (Date)
     public class Date
     {
-        Date(String date)
+        public Date(String date)
         {
             String[] arr = date.Split('.');
             Day = int.Parse(arr[0]);
@@ -30,7 +30,7 @@ namespace Service
                 return 1;
             if (this.year < date.Year)
                 return -1;
-            if(this.year == date.Year)
+            if (this.year == date.Year)
             {
                 if (this.month > date.Month)
                     return 1;
@@ -133,16 +133,33 @@ namespace Service
 
     }
     #endregion
+    #region Статусы (Status)
+    public class Status
+    {
+        public Status(int rowid, String name)
+        {
+            RowId = rowid;
+            Name = name;
+        }
+        #region Getters/Setters
+        public int RowId { get { return rowid; } set { this.rowid = value; } }
+        public String Name { get { return name; } set { this.name = value; } }
+        #endregion
+        private int rowid = 0;
+        String name = "";
+    }
+    #endregion
     #region Устройство (Device)
     public class Device
     {
-        public Device(int rowid, Model model, Dept dept, String serialNumber, String inventoryNumber)
+        public Device(int rowid, Model model, Dept dept, Status status, String serialNumber, String inventoryNumber)
         {
             RowId = rowid;
             Model = model;
             Dept = dept;
             SerialNumber = serialNumber;
             InventoryNumber = inventoryNumber;
+            Status = status;
         }
         #region Getters/Setters
         public int RowId { get { return rowid; } set { this.rowid = value; } }
@@ -150,11 +167,13 @@ namespace Service
         public Dept Dept { get { return dept; } set { this.dept = value; } }
         public String SerialNumber { get { return serialNumber; } set { this.serialNumber = value; } }
         public String InventoryNumber { get { return inventoryNumber; } set { this.inventoryNumber = value; } }
+        public Status Status { get { return status; } set { this.status = value; } }
         #endregion
         private int rowid = 0;
         private String serialNumber = "", inventoryNumber = "";
         Model model;
         Dept dept;
+        Status status;
 
     }
     #endregion
@@ -184,21 +203,23 @@ namespace Service
     #region Параметры устройста (Parameter)
     public class Parameter
     {
-        public Parameter(int rowid, String name, String unit, Model model)
+        public Parameter(int rowid, String name, String unit, Model model, String defaultValue)
         {
             RowId = rowid;
             Name = name;
             Unit = unit;
             Model = model;
+            DefaultValue = defaultValue;
         }
         #region Getters/Setters
         public int RowId { get { return rowid; } set { this.rowid = value; } }
         public String Name { get { return name; } set { this.name = value; } }
         public String Unit { get { return unit; } set { this.unit = value; } }
         public Model Model { get { return model; } set { this.model = value; } }
+        public String DefaultValue { get { return defaultValue; } set { this.defaultValue = value; } }
         #endregion
         private int rowid = 0;
-        private String name = "", unit = "";
+        private String name = "", unit = "", defaultValue = "";
         Model model;
     }
     #endregion
@@ -248,17 +269,20 @@ namespace Service
     #region Использованные запчасти (SparesUsed)
     public class SparesUsed
     {
-        public SparesUsed(int rowid, ServiceLog serviceLog)
+        public SparesUsed(int rowid, Spares spare, ServiceLog serviceLog)
         {
             RowId = rowid;
             ServiceLog = serviceLog;
+            Spare = spare;
         }
         #region Getters/Setters
         public int RowId { get { return rowid; } set { this.rowid = value; } }
         public ServiceLog ServiceLog { get { return serviceLog; } set { this.serviceLog = value; } }
+        public Spares Spare { get { return spare; } set { this.spare = value; } }
         #endregion
         private int rowid = 0;
         ServiceLog serviceLog;
+        Spares spare;
     }
     #endregion
     #region Работы (Service)
@@ -287,17 +311,21 @@ namespace Service
     #region Произведенные работы (ServiceDone)
     public class ServiceDone
     {
-        public ServiceDone(int rowid, ServiceLog serviceLog)
+        public ServiceDone(int rowid, Service service, ServiceLog serviceLog)
         {
             RowId = rowid;
             ServiceLog = serviceLog;
+            Service = service;
         }
         #region Getters/Setters
         public int RowId { get { return rowid; } set { this.rowid = value; } }
         public ServiceLog ServiceLog { get { return serviceLog; } set { this.serviceLog = value; } }
+        public Service Service { get { return service; } set { this.service = value; } }
         #endregion
         private int rowid = 0;
+        Service service;
         ServiceLog serviceLog;
     }
     #endregion
+    
 }

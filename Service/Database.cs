@@ -11,9 +11,53 @@ namespace Service
 {
     class Database
     {
-        private SQLiteConnection dbConnect = new SQLiteConnection("Data Source=\"database_stud.db\"");
+        private SQLiteConnection dbConnect = new SQLiteConnection("Data Source=\"service_db.db\"");
         private SQLiteCommand sqlCmd;
         private String sqlQuery;
+        #region Получить всех ремонтников
+        public List<Repairer> SelectRepairers()
+        {
+            List<Repairer> repairers = new List<Repairer>();
+            DataTable table = new DataTable();
+            sqlQuery = "Select * FROM repairer";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+                return null;
+            }
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, dbConnect);
+            adapter.Fill(table);
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                repairers.Add(new Repairer(int.Parse(table.Rows[i][0].ToString()), table.Rows[i][1].ToString(), table.Rows[i][2].ToString(), table.Rows[i][3].ToString(), table.Rows[i][4].ToString()));
+            }
+            dbConnect.Close();
+            return repairers;
+        }
+        #endregion
+        #region Получить все статусы
+        public List<Status> SelectStatuses()
+        {
+            List<Status> statuses = new List<Status>();
+            DataTable table = new DataTable();
+            sqlQuery = "Select * FROM statuses";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+                return null;
+            }
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, dbConnect);
+            adapter.Fill(table);
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                statuses.Add(new Status(int.Parse(table.Rows[i][0].ToString()), table.Rows[i][1].ToString()));
+            }
+            dbConnect.Close();
+            return statuses;
+        }
+        #endregion
         #region Получить все отделы
         public List<Dept> SelectDepts()
         {
@@ -103,7 +147,7 @@ namespace Service
                 foreach (Model model in models)
                 {
                     if (int.Parse(table.Rows[i][1].ToString()) == model.RowId)
-                        parameters.Add(new Parameter(int.Parse(table.Rows[i][0].ToString()), table.Rows[i][2].ToString(), table.Rows[i][3].ToString(), model));
+                        parameters.Add(new Parameter(int.Parse(table.Rows[i][0].ToString()), table.Rows[i][2].ToString(), table.Rows[i][3].ToString(), model, table.Rows[i][4].ToString()));
                 }
             }
             dbConnect.Close();
@@ -162,86 +206,8 @@ namespace Service
             return spares;
         }
         #endregion
-        #region Получить все значения параметров TODO
-        public List<ParametersValues> SelectParametersValues(List<Model> models)
-        {
-            List<Parameter> parameters = new List<Parameter>();
-            DataTable table = new DataTable();
-            sqlQuery = "Select * FROM parameters";
-            dbConnect.Open();
-            if (dbConnect.State != ConnectionState.Open)
-            {
-                MessageBox.Show("Нет соединения с базой данных!");
-                return null;
-            }
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, dbConnect);
-            adapter.Fill(table);
-            for (int i = 0; i < table.Rows.Count; i++)
-            {
-                foreach (Model model in models)
-                {
-                    if (int.Parse(table.Rows[i][1].ToString()) == model.RowId)
-                        parameters.Add(new Parameter(int.Parse(table.Rows[i][0].ToString()), table.Rows[i][2].ToString(), table.Rows[i][3].ToString(), model));
-                }
-            }
-            dbConnect.Close();
-            return parameters;
-        }
-        #endregion
-        #region Получить все проделанные работы TODO
-        public List<ServiceDone> SelectServiceDone(List<Model> models)
-        {
-            List<Service> services = new List<Service>();
-            DataTable table = new DataTable();
-            sqlQuery = "Select * FROM service";
-            dbConnect.Open();
-            if (dbConnect.State != ConnectionState.Open)
-            {
-                MessageBox.Show("Нет соединения с базой данных!");
-                return null;
-            }
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, dbConnect);
-            adapter.Fill(table);
-            for (int i = 0; i < table.Rows.Count; i++)
-            {
-                foreach (Model model in models)
-                {
-                    if (int.Parse(table.Rows[i][1].ToString()) == model.RowId)
-                        services.Add(new Service(int.Parse(table.Rows[i][0].ToString()), table.Rows[i][2].ToString(), table.Rows[i][3].ToString(), table.Rows[i][4].ToString(), model));
-                }
-            }
-            dbConnect.Close();
-            return services;
-        }
-        #endregion
-        #region Получить все использованные запчасти TODO
-        public List<SparesUsed> SelectSparesUsed(List<Model> models)
-        {
-            List<SparesUsed> sparesUsed = new List<SparesUsed>();
-            DataTable table = new DataTable();
-            sqlQuery = "Select * FROM spares";
-            dbConnect.Open();
-            if (dbConnect.State != ConnectionState.Open)
-            {
-                MessageBox.Show("Нет соединения с базой данных!");
-                return null;
-            }
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, dbConnect);
-            adapter.Fill(table);
-            for (int i = 0; i < table.Rows.Count; i++)
-            {
-                foreach (Model model in models)
-                {
-                    if (int.Parse(table.Rows[i][1].ToString()) == model.RowId)
-                        sparesUsed.Add(new SparesUsed(int.Parse(table.Rows[i][0].ToString()), table.Rows[i][2].ToString(), table.Rows[i][3].ToString(), model));
-                }
-            }
-            dbConnect.Close();
-            return sparesUsed;
-        }
-        #endregion
         #region Получить все устройства
-        public List<Device> SelectDevices(List<Model> models, List<Dept> depts)
+        public List<Device> SelectDevices(List<Model> models, List<Dept> depts, List<Status> statuses)
         {
             List<Device> devices = new List<Device>();
             DataTable table = new DataTable();
@@ -260,13 +226,132 @@ namespace Service
                 {
                     foreach (Dept dept in depts)
                     {
-                        if ((int.Parse(table.Rows[i][1].ToString()) == model.RowId) && (int.Parse(table.Rows[i][2].ToString()) == dept.RowId))
-                            devices.Add(new Device(int.Parse(table.Rows[i][0].ToString()), model, dept, table.Rows[i][3].ToString(), table.Rows[i][4].ToString()));
+                        foreach (Status status in statuses)
+                        {
+                            if ((int.Parse(table.Rows[i][1].ToString()) == model.RowId) && (int.Parse(table.Rows[i][2].ToString()) == dept.RowId) && (int.Parse(table.Rows[i][3].ToString()) == status.RowId))
+                                devices.Add(new Device(int.Parse(table.Rows[i][0].ToString()), model, dept, status, table.Rows[i][4].ToString(), table.Rows[i][5].ToString()));
+                        }
                     }
                 }
             }
             dbConnect.Close();
             return devices;
+        }
+        #endregion
+        #region Получить все записи из журнала ремонтов
+        public List<ServiceLog> SelectServiceLog(List<Device> devices, List<Repairer> repairers)
+        {
+            List<ServiceLog> serviceLogs = new List<ServiceLog>();
+            DataTable table = new DataTable();
+            sqlQuery = "Select * FROM serviceLog";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+                return null;
+            }
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, dbConnect);
+            adapter.Fill(table);
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                foreach (Device device in devices)
+                {
+                    foreach (Repairer repairer in repairers)
+                    {
+                        if ((int.Parse(table.Rows[i][1].ToString()) == device.RowId) && (int.Parse(table.Rows[i][2].ToString()) == repairer.RowId))
+                            serviceLogs.Add(new ServiceLog(int.Parse(table.Rows[i][0].ToString()), device, new Date(table.Rows[i][3].ToString()), repairer));
+                    }
+                }
+            }
+            dbConnect.Close();
+            return serviceLogs;
+        }
+        #endregion
+        #region Получить все значения параметров
+        public List<ParametersValues> SelectParametersValues(List<Parameter> parameters, List<ServiceLog> serviceLogs)
+        {
+            List<ParametersValues> parametersValues = new List<ParametersValues>();
+            DataTable table = new DataTable();
+            sqlQuery = "Select * FROM parametersValues";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+                return null;
+            }
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, dbConnect);
+            adapter.Fill(table);
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                foreach (Parameter parameter in parameters)
+                {
+                    foreach (ServiceLog serviceLog in serviceLogs)
+                    {
+                        if ((int.Parse(table.Rows[i][1].ToString()) == parameter.RowId) && (int.Parse(table.Rows[i][2].ToString()) == serviceLog.RowId))
+                            parametersValues.Add(new ParametersValues(int.Parse(table.Rows[i][0].ToString()), parameter, serviceLog, table.Rows[i][3].ToString()));
+                    }
+                }
+            }
+            dbConnect.Close();
+            return parametersValues;
+        }
+        #endregion
+        #region Получить все проделанные работы
+        public List<ServiceDone> SelectServicesDone(List<Service> services, List<ServiceLog> serviceLogs)
+        {
+            List<ServiceDone> servicesDone = new List<ServiceDone>();
+            DataTable table = new DataTable();
+            sqlQuery = "Select * FROM serviceDone";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+                return null;
+            }
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, dbConnect);
+            adapter.Fill(table);
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                foreach (Service service in services)
+                {
+                    foreach (ServiceLog serviceLog in serviceLogs)
+                    {
+                        if ((int.Parse(table.Rows[i][1].ToString()) == service.RowId) && (int.Parse(table.Rows[i][2].ToString()) == serviceLog.RowId))
+                            servicesDone.Add(new ServiceDone(int.Parse(table.Rows[i][0].ToString()), service, serviceLog));
+                    }
+                }
+            }
+            dbConnect.Close();
+            return servicesDone;
+        }
+        #endregion
+        #region Получить все использованные запчасти
+        public List<SparesUsed> SelectSparesUsed(List<Spares> spares, List<ServiceLog> serviceLogs)
+        {
+            List<SparesUsed> sparesUsed = new List<SparesUsed>();
+            DataTable table = new DataTable();
+            sqlQuery = "Select * FROM sparesUsed";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+                return null;
+            }
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, dbConnect);
+            adapter.Fill(table);
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                foreach (Spares spare in spares)
+                {
+                    foreach (ServiceLog serviceLog in serviceLogs)
+                    {
+                        if ((int.Parse(table.Rows[i][1].ToString()) == spare.RowId) && (int.Parse(table.Rows[i][2].ToString()) == serviceLog.RowId))
+                            sparesUsed.Add(new SparesUsed(int.Parse(table.Rows[i][0].ToString()), spare, serviceLog));
+                    }
+                }
+            }
+            dbConnect.Close();
+            return sparesUsed;
         }
         #endregion
     }
