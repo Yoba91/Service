@@ -63,7 +63,7 @@ namespace Service
         {
             List<Dept> depts = new List<Dept>();
             DataTable table = new DataTable();
-            sqlQuery = "Select * FROM dept";
+            sqlQuery = "Select * FROM 'dept'";
             dbConnect.Open();
             if (dbConnect.State != ConnectionState.Open)
             {
@@ -129,7 +129,7 @@ namespace Service
         }
         #endregion
         #region Получить все параметры
-        public List<Parameter> SelectParameters(List<Model> models)
+        public List<Parameter> SelectParameters()
         {
             List<Parameter> parameters = new List<Parameter>();
             DataTable table = new DataTable();
@@ -144,18 +144,43 @@ namespace Service
             adapter.Fill(table);
             for (int i = 0; i < table.Rows.Count; i++)
             {
-                foreach (Model model in models)
-                {
-                    if (int.Parse(table.Rows[i][1].ToString()) == model.RowId)
-                        parameters.Add(new Parameter(int.Parse(table.Rows[i][0].ToString()), table.Rows[i][2].ToString(), table.Rows[i][3].ToString(), model, table.Rows[i][4].ToString()));
-                }
+                parameters.Add(new Parameter(int.Parse(table.Rows[i][0].ToString()), table.Rows[i][1].ToString(), table.Rows[i][2].ToString(), table.Rows[i][3].ToString()));
             }
             dbConnect.Close();
             return parameters;
         }
         #endregion        
+        #region Получить все параметры для моделей
+        public List<ParameterForModel> SelectParametersForModels(List<Model> models, List<Parameter> parameters)
+        {
+            List<ParameterForModel> parametersForModels = new List<ParameterForModel>();
+            DataTable table = new DataTable();
+            sqlQuery = "Select * FROM parametersForModels";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+                return null;
+            }
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, dbConnect);
+            adapter.Fill(table);
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                foreach (Model model in models)
+                {
+                    foreach (Parameter parameter in parameters)
+                    {
+                        if ((int.Parse(table.Rows[i][1].ToString()) == model.RowId) && (int.Parse(table.Rows[i][2].ToString()) == parameter.RowId))
+                            parametersForModels.Add(new ParameterForModel(int.Parse(table.Rows[i][0].ToString()), model, parameter));
+                    }
+                }
+            }
+            dbConnect.Close();
+            return parametersForModels;
+        }
+        #endregion  
         #region Получить все виды работы
-        public List<Service> SelectService(List<Model> models)
+        public List<Service> SelectService()
         {
             List<Service> services = new List<Service>();
             DataTable table = new DataTable();
@@ -170,18 +195,43 @@ namespace Service
             adapter.Fill(table);
             for (int i = 0; i < table.Rows.Count; i++)
             {
-                foreach (Model model in models)
-                {
-                    if (int.Parse(table.Rows[i][1].ToString()) == model.RowId)
-                        services.Add(new Service(int.Parse(table.Rows[i][0].ToString()), table.Rows[i][2].ToString(), table.Rows[i][3].ToString(), table.Rows[i][4].ToString(), model));
-                }
+                services.Add(new Service(int.Parse(table.Rows[i][0].ToString()), table.Rows[i][1].ToString(), table.Rows[i][2].ToString(), table.Rows[i][3].ToString()));
             }
             dbConnect.Close();
             return services;
         }
         #endregion
+        #region Получить все виды работы для модели
+        public List<ServiceForModel> SelectServiceForModel(List<Model> models, List<Service> services)
+        {
+            List<ServiceForModel> servicesForModel = new List<ServiceForModel>();
+            DataTable table = new DataTable();
+            sqlQuery = "Select * FROM serviceForModels";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+                return null;
+            }
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, dbConnect);
+            adapter.Fill(table);
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                foreach (Model model in models)
+                {
+                    foreach (Service service in services)
+                    {
+                        if ((int.Parse(table.Rows[i][1].ToString()) == model.RowId) && (int.Parse(table.Rows[i][2].ToString()) == service.RowId))
+                            servicesForModel.Add(new ServiceForModel(int.Parse(table.Rows[i][0].ToString()), model, service));
+                    }
+                }
+            }
+            dbConnect.Close();
+            return servicesForModel;
+        }
+        #endregion
         #region Получить все запчасти
-        public List<Spares> SelectSpares(List<Model> models)
+        public List<Spares> SelectSpares()
         {
             List<Spares> spares = new List<Spares>();
             DataTable table = new DataTable();
@@ -196,14 +246,39 @@ namespace Service
             adapter.Fill(table);
             for (int i = 0; i < table.Rows.Count; i++)
             {
-                foreach (Model model in models)
-                {
-                    if (int.Parse(table.Rows[i][1].ToString()) == model.RowId)
-                        spares.Add(new Spares(int.Parse(table.Rows[i][0].ToString()), table.Rows[i][2].ToString(), table.Rows[i][3].ToString(), model));
-                }
+                spares.Add(new Spares(int.Parse(table.Rows[i][0].ToString()), table.Rows[i][1].ToString(), table.Rows[i][2].ToString()));
             }
             dbConnect.Close();
             return spares;
+        }
+        #endregion
+        #region Получить все запчасти для моделей
+        public List<SparesForModels> SelectSparesForModels(List<Model> models, List<Spares> spares)
+        {
+            List<SparesForModels> sparesForModels = new List<SparesForModels>();
+            DataTable table = new DataTable();
+            sqlQuery = "Select * FROM sparesForModels";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+                return null;
+            }
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, dbConnect);
+            adapter.Fill(table);
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                foreach (Spares spare in spares)
+                {
+                    foreach (Model model in models)
+                    {
+                        if ((int.Parse(table.Rows[i][1].ToString()) == model.RowId) && (int.Parse(table.Rows[i][2].ToString()) == spare.RowId))
+                            sparesForModels.Add(new SparesForModels(int.Parse(table.Rows[i][0].ToString()), model, spare));
+                    }
+                }
+            }
+            dbConnect.Close();
+            return sparesForModels;
         }
         #endregion
         #region Получить все устройства
@@ -268,7 +343,7 @@ namespace Service
         }
         #endregion
         #region Получить все значения параметров
-        public List<ParametersValues> SelectParametersValues(List<Parameter> parameters, List<ServiceLog> serviceLogs)
+        public List<ParametersValues> SelectParametersValues(List<ParameterForModel> parametersForModels, List<ServiceLog> serviceLogs)
         {
             List<ParametersValues> parametersValues = new List<ParametersValues>();
             DataTable table = new DataTable();
@@ -283,12 +358,12 @@ namespace Service
             adapter.Fill(table);
             for (int i = 0; i < table.Rows.Count; i++)
             {
-                foreach (Parameter parameter in parameters)
+                foreach (ParameterForModel parameterForModel in parametersForModels)
                 {
                     foreach (ServiceLog serviceLog in serviceLogs)
                     {
-                        if ((int.Parse(table.Rows[i][1].ToString()) == parameter.RowId) && (int.Parse(table.Rows[i][2].ToString()) == serviceLog.RowId))
-                            parametersValues.Add(new ParametersValues(int.Parse(table.Rows[i][0].ToString()), parameter, serviceLog, table.Rows[i][3].ToString()));
+                        if ((int.Parse(table.Rows[i][1].ToString()) == parameterForModel.RowId) && (int.Parse(table.Rows[i][2].ToString()) == serviceLog.RowId))
+                            parametersValues.Add(new ParametersValues(int.Parse(table.Rows[i][0].ToString()), parameterForModel, serviceLog, table.Rows[i][3].ToString()));
                     }
                 }
             }
@@ -297,7 +372,7 @@ namespace Service
         }
         #endregion
         #region Получить все проделанные работы
-        public List<ServiceDone> SelectServicesDone(List<Service> services, List<ServiceLog> serviceLogs)
+        public List<ServiceDone> SelectServicesDone(List<ServiceForModel> servicesForModels, List<ServiceLog> serviceLogs)
         {
             List<ServiceDone> servicesDone = new List<ServiceDone>();
             DataTable table = new DataTable();
@@ -312,12 +387,12 @@ namespace Service
             adapter.Fill(table);
             for (int i = 0; i < table.Rows.Count; i++)
             {
-                foreach (Service service in services)
+                foreach (ServiceForModel serviceForModel in servicesForModels)
                 {
                     foreach (ServiceLog serviceLog in serviceLogs)
                     {
-                        if ((int.Parse(table.Rows[i][1].ToString()) == service.RowId) && (int.Parse(table.Rows[i][2].ToString()) == serviceLog.RowId))
-                            servicesDone.Add(new ServiceDone(int.Parse(table.Rows[i][0].ToString()), service, serviceLog));
+                        if ((int.Parse(table.Rows[i][1].ToString()) == serviceForModel.RowId) && (int.Parse(table.Rows[i][2].ToString()) == serviceLog.RowId))
+                            servicesDone.Add(new ServiceDone(int.Parse(table.Rows[i][0].ToString()), serviceForModel, serviceLog));
                     }
                 }
             }
@@ -326,7 +401,7 @@ namespace Service
         }
         #endregion
         #region Получить все использованные запчасти
-        public List<SparesUsed> SelectSparesUsed(List<Spares> spares, List<ServiceLog> serviceLogs)
+        public List<SparesUsed> SelectSparesUsed(List<SparesForModels> sparesForModels, List<ServiceLog> serviceLogs)
         {
             List<SparesUsed> sparesUsed = new List<SparesUsed>();
             DataTable table = new DataTable();
@@ -341,12 +416,12 @@ namespace Service
             adapter.Fill(table);
             for (int i = 0; i < table.Rows.Count; i++)
             {
-                foreach (Spares spare in spares)
+                foreach (SparesForModels spareForModel in sparesForModels)
                 {
                     foreach (ServiceLog serviceLog in serviceLogs)
                     {
-                        if ((int.Parse(table.Rows[i][1].ToString()) == spare.RowId) && (int.Parse(table.Rows[i][2].ToString()) == serviceLog.RowId))
-                            sparesUsed.Add(new SparesUsed(int.Parse(table.Rows[i][0].ToString()), spare, serviceLog));
+                        if ((int.Parse(table.Rows[i][1].ToString()) == spareForModel.RowId) && (int.Parse(table.Rows[i][2].ToString()) == serviceLog.RowId))
+                            sparesUsed.Add(new SparesUsed(int.Parse(table.Rows[i][0].ToString()), spareForModel, serviceLog));
                     }
                 }
             }

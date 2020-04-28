@@ -203,127 +203,175 @@ namespace Service
     #region Параметры устройста (Parameter)
     public class Parameter
     {
-        public Parameter(int rowid, String name, String unit, Model model, String defaultValue)
+        public Parameter(int rowid, String name, String unit, String defaultValue)
         {
             RowId = rowid;
             Name = name;
             Unit = unit;
-            Model = model;
             DefaultValue = defaultValue;
         }
         #region Getters/Setters
         public int RowId { get { return rowid; } set { this.rowid = value; } }
         public String Name { get { return name; } set { this.name = value; } }
         public String Unit { get { return unit; } set { this.unit = value; } }
-        public Model Model { get { return model; } set { this.model = value; } }
         public String DefaultValue { get { return defaultValue; } set { this.defaultValue = value; } }
         #endregion
         private int rowid = 0;
         private String name = "", unit = "", defaultValue = "";
+    }
+    #endregion
+    #region Параметры устройста для модели (ParameterForModel)
+    public class ParameterForModel
+    {
+        public ParameterForModel(int rowid, Model model, Parameter parameter)
+        {
+            RowId = rowid;
+            Model = model;
+            Parameter = parameter;
+        }
+        #region Getters/Setters
+        public int RowId { get { return rowid; } set { this.rowid = value; } }
+        public Model Model { get { return model; } set { this.model = value; } }
+        public Parameter Parameter { get { return parameter; } set { this.parameter = value; } }
+        #endregion
+        private int rowid = 0;
         Model model;
+        Parameter parameter;
     }
     #endregion
     #region Значения параметров устройста (ParametersValues)
     public class ParametersValues
     {
-        public ParametersValues(int rowid, Parameter parameter, ServiceLog serviceLog, String value)
+        public ParametersValues(int rowid, ParameterForModel parameterForModel, ServiceLog serviceLog, String value)
         {
             RowId = rowid;
             Value = value;
-            Parameter = parameter;
+            ParameterForModel = parameterForModel;
             ServiceLog = serviceLog;
         }
         #region Getters/Setters
         public int RowId { get { return rowid; } set { this.rowid = value; } }
         public String Value { get { return value; } set { this.value = value; } }
-        public Parameter Parameter { get { return parameter; } set { this.parameter = value; } }
+        public ParameterForModel ParameterForModel { get { return parameterForModel; } set { this.parameterForModel = value; } }
         public ServiceLog ServiceLog { get { return serviceLog; } set { this.serviceLog = value; } }
         #endregion
         private int rowid = 0;
         private String value = "";
-        Parameter parameter;
+        ParameterForModel parameterForModel;
         ServiceLog serviceLog;
     }
     #endregion
     #region Запчасти (Spares)
     public class Spares
     {
-        public Spares(int rowid, String name, String description, Model model)
+        public Spares(int rowid, String name, String description)
         {
             RowId = rowid;
             Name = name;
             Description = description;
-            Model = model;
         }
         #region Getters/Setters
         public int RowId { get { return rowid; } set { this.rowid = value; } }
         public String Name { get { return name; } set { this.name = value; } }
         public String Description { get { return description; } set { this.description = value; } }
-        public Model Model { get { return model; } set { this.model = value; } }
         #endregion
         private int rowid = 0;
         private String name = "", description = "";
-        Model model;
+    }
+    #endregion
+    #region Запчасти для модели (SparesForModels)
+    public class SparesForModels
+    {
+        public SparesForModels(int rowid, Model model, Spares spare)
+        {
+            RowId = rowid;
+            Model = model;
+            Spare = spare;
+        }
+        #region Getters/Setters
+        public int RowId { get { return rowid; } set { this.rowid = value; } }
+        public Model Model { get { return model; } set { this.model = value; } }
+        public Spares Spare { get { return spare; } set { this.spare = value; } }
+        #endregion
+        private int rowid = 0;
+        private Model model;
+        private Spares spare;
     }
     #endregion
     #region Использованные запчасти (SparesUsed)
     public class SparesUsed
     {
-        public SparesUsed(int rowid, Spares spare, ServiceLog serviceLog)
+        public SparesUsed(int rowid, SparesForModels spareForModel, ServiceLog serviceLog)
         {
             RowId = rowid;
             ServiceLog = serviceLog;
-            Spare = spare;
+            SpareForModel = spareForModel;
         }
         #region Getters/Setters
         public int RowId { get { return rowid; } set { this.rowid = value; } }
         public ServiceLog ServiceLog { get { return serviceLog; } set { this.serviceLog = value; } }
-        public Spares Spare { get { return spare; } set { this.spare = value; } }
+        public SparesForModels SpareForModel { get { return spareForModel; } set { this.spareForModel = value; } }
         #endregion
         private int rowid = 0;
         ServiceLog serviceLog;
-        Spares spare;
+        SparesForModels spareForModel;
     }
     #endregion
     #region Работы (Service)
     public class Service
     {
-        public Service(int rowid, String fullName, String shortName, String description, Model model)
+        public Service(int rowid, String fullName, String shortName, String description)
         {
             RowId = rowid;
             FullName = fullName;
             ShortName = shortName;
             Description = description;
-            Model = model;
         }
         #region Getters/Setters
         public int RowId { get { return rowid; } set { this.rowid = value; } }
         public String FullName { get { return fullName; } set { this.fullName = value; } }
         public String ShortName { get { return shortName; } set { this.shortName = value; } }
         public String Description { get { return description; } set { this.description = value; } }
-        public Model Model { get { return model; } set { this.model = value; } }
         #endregion
         private int rowid = 0;
         private String fullName = "", shortName = "", description = "";
+    }
+    #endregion
+    #region Работы для модели (ServiceForModel)
+    public class ServiceForModel
+    {
+        public ServiceForModel(int rowid, Model model, Service service)
+        {
+            RowId = rowid;
+            Model = model;
+            Service = service;
+        }
+        #region Getters/Setters
+        public int RowId { get { return rowid; } set { this.rowid = value; } }
+        public Model Model { get { return model; } set { this.model = value; } }
+        public Service Service { get { return service; } set { this.service = value; } }
+        #endregion
+        private int rowid = 0;
         Model model;
+        Service service;
     }
     #endregion
     #region Произведенные работы (ServiceDone)
     public class ServiceDone
     {
-        public ServiceDone(int rowid, Service service, ServiceLog serviceLog)
+        public ServiceDone(int rowid, ServiceForModel serviceForModel, ServiceLog serviceLog)
         {
             RowId = rowid;
             ServiceLog = serviceLog;
-            Service = service;
+            ServiceForModel = serviceForModel;
         }
         #region Getters/Setters
         public int RowId { get { return rowid; } set { this.rowid = value; } }
         public ServiceLog ServiceLog { get { return serviceLog; } set { this.serviceLog = value; } }
-        public Service Service { get { return service; } set { this.service = value; } }
+        public ServiceForModel ServiceForModel { get { return serviceForModel; } set { this.serviceForModel = value; } }
         #endregion
         private int rowid = 0;
-        Service service;
+        ServiceForModel serviceForModel;
         ServiceLog serviceLog;
     }
     #endregion
