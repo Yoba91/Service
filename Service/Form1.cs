@@ -405,6 +405,12 @@ namespace Service
         {
             panelParameters.Size = new Size(panelParameters.Size.Width, dataGridViewServiceLog.Size.Height);
             panelParameters.Location = new Point(dataGridViewServiceLog.Location.X + dataGridViewServiceLog.Size.Width + 5, 30);
+            dataGridViewParameters.Size = new Size(266, (dataGridViewServiceLog.Size.Height / 3) - 1);
+            dataGridViewParameters.Location = new Point(buttonParametersSpoiler.Location.X + buttonParametersSpoiler.Size.Width + 3, buttonParametersSpoiler.Location.Y);
+            dataGridViewSpares.Size = new Size(266, (dataGridViewServiceLog.Size.Height / 3) - 1);
+            dataGridViewSpares.Location = new Point(buttonParametersSpoiler.Location.X + buttonParametersSpoiler.Size.Width + 3, dataGridViewParameters.Location.Y + dataGridViewParameters.Size.Height + 2);
+            dataGridViewServices.Size = new Size(266, (dataGridViewServiceLog.Size.Height / 3) - 1);
+            dataGridViewServices.Location = new Point(buttonParametersSpoiler.Location.X + buttonParametersSpoiler.Size.Width + 3, dataGridViewSpares.Location.Y + dataGridViewSpares.Size.Height + 2);
         }
 
         private void buttonParametersSpoiler_Click(object sender, EventArgs e)
@@ -642,28 +648,108 @@ namespace Service
         {
             ApplyFilters();
         }
-
+        #region Нажать на Сброс результатов
         private void buttonClear_Click(object sender, EventArgs e)
         {
-
+            dateTimePickerFrom.Value = dateTimePickerFrom.MinDate;
+            dateTimePickerBefore.Value = DateTime.Today;
+            listBoxStatusesFilter.SelectedItems.Clear();
+            listBoxRepairersFilter.SelectedItems.Clear();
+            listBoxDeptsFilter.SelectedItems.Clear();
+            listBoxTypesFilter.SelectedItems.Clear();
+            ApplyFilters();
         }
-
+        #endregion
+        #region Нажать на Поиск
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             if (textBoxSearch.TextLength != 0)
             {
+                ApplyFilters();
                 List<ServiceLog> tempLog = new List<ServiceLog>();
                 foreach (ServiceLog serviceLog in releaseLogs)
                 {
-                    for (int index = 0; index < checkedListBoxFilterSearch.SelectedItems.Count)
+                    for (int index = 0; index < checkedListBoxFilterSearch.CheckedItems.Count; index++)
                     {
-                        if (checkedListBoxFilterSearch.Items.IndexOf(checkedListBoxFilterSearch.SelectedItems[index]) == 0)
+                        if (checkedListBoxFilterSearch.Items.IndexOf(checkedListBoxFilterSearch.CheckedItems[index]) == 0)
                         {
-                            if(serviceLog.Device.InventoryNumber.ToLower().Contains())
+                            if (serviceLog.Device.InventoryNumber.ToLower().Contains(textBoxSearch.Text.ToLower()))
+                            {
+                                if (tempLog.IndexOf(serviceLog) == -1)
+                                {
+                                    tempLog.Add(serviceLog);
+                                }
+                            }
                         }
+                        if (checkedListBoxFilterSearch.Items.IndexOf(checkedListBoxFilterSearch.CheckedItems[index]) == 1)
+                        {
+                            if (serviceLog.Device.SerialNumber.ToLower().Contains(textBoxSearch.Text.ToLower()))
+                            {
+                                if (tempLog.IndexOf(serviceLog) == -1)
+                                {
+                                    tempLog.Add(serviceLog);
+                                }
+                            }
+                        }
+                        if (checkedListBoxFilterSearch.Items.IndexOf(checkedListBoxFilterSearch.CheckedItems[index]) == 2)
+                        {
+                            if ((serviceLog.Device.Model.FullName.ToLower().Contains(textBoxSearch.Text.ToLower())) || (serviceLog.Device.Model.ShortName.ToLower().Contains(textBoxSearch.Text.ToLower())))
+                            {
+                                if (tempLog.IndexOf(serviceLog) == -1)
+                                {
+                                    tempLog.Add(serviceLog);
+                                }
+                            }
+                        }
+                        if (checkedListBoxFilterSearch.Items.IndexOf(checkedListBoxFilterSearch.CheckedItems[index]) == 3)
+                        {
+                            if ((serviceLog.Device.Model.Type.FullName.ToLower().Contains(textBoxSearch.Text.ToLower())) || (serviceLog.Device.Model.Type.FullName.ToLower().Contains(textBoxSearch.Text.ToLower())))
+                            {
+                                if (tempLog.IndexOf(serviceLog) == -1)
+                                {
+                                    tempLog.Add(serviceLog);
+                                }
+                            }
+                        }
+                        if (checkedListBoxFilterSearch.Items.IndexOf(checkedListBoxFilterSearch.CheckedItems[index]) == 4)
+                        {
+                            if ((serviceLog.Repairer.Name.ToLower() + " " + serviceLog.Repairer.Surname.ToLower() + " " + serviceLog.Repairer.Midname).ToLower().Contains(textBoxSearch.Text.ToLower()) || (serviceLog.Repairer.Surname.ToLower() + " " + serviceLog.Repairer.Name.ToLower() + " " + serviceLog.Repairer.Midname).ToLower().Contains(textBoxSearch.Text.ToLower()))
+                            {
+                                if (tempLog.IndexOf(serviceLog) == -1)
+                                {
+                                    tempLog.Add(serviceLog);
+                                }
+                            }
+                        }
+
                     }
                 }
+                releaseLogs.Clear();
+                foreach (ServiceLog temp in tempLog)
+                    releaseLogs.Add(temp);
+                DataGridViewServiceLogFill();
+
             }
         }
+        #endregion
+        #region Нажать на Фильтры
+        private void buttonFiltersSpoiler_Click(object sender, EventArgs e)
+        {
+            if (panelFilters.Size.Height == buttonFiltersSpoiler.Size.Height)
+            {
+                panelFilters.Size = new Size(panelFilters.Size.Width, panelFilters.Size.Height + 179);
+                dataGridViewServiceLog.Size = new Size(dataGridViewServiceLog.Size.Width, dataGridViewServiceLog.Size.Height - 179);
+                panelFilters.Location = new Point(panelFilters.Location.X, panelFilters.Location.Y - 179);
+            }
+            else
+            if (panelFilters.Size.Height == 203)
+            {
+                panelFilters.Size = new Size(panelFilters.Size.Width, panelFilters.Size.Height - 179);
+                dataGridViewServiceLog.Size = new Size(dataGridViewServiceLog.Size.Width, dataGridViewServiceLog.Size.Height + 179);
+                panelFilters.Location = new Point(panelFilters.Location.X, panelFilters.Location.Y + 179);
+                dataGridViewServiceLog.Refresh();
+            }
+        }
+        #endregion
     }
 }

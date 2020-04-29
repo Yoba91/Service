@@ -66,6 +66,8 @@
             this.dataGridViewSpares = new System.Windows.Forms.DataGridView();
             this.dataGridViewParameters = new System.Windows.Forms.DataGridView();
             this.buttonParametersSpoiler = new System.Windows.Forms.Button();
+            this.buttonUpdateLog = new System.Windows.Forms.Button();
+            this.buttonInsertLog = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewServiceLog)).BeginInit();
             this.panelFilters.SuspendLayout();
@@ -165,6 +167,7 @@
             this.dataGridViewServiceLog.RowHeadersVisible = false;
             this.dataGridViewServiceLog.Size = new System.Drawing.Size(705, 488);
             this.dataGridViewServiceLog.TabIndex = 0;
+            this.dataGridViewServiceLog.TabStop = false;
             this.dataGridViewServiceLog.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewServiceLog_CellClick);
             this.dataGridViewServiceLog.Paint += new System.Windows.Forms.PaintEventHandler(this.dataGridViewServiceLog_Paint);
             // 
@@ -194,6 +197,8 @@
             this.panelFilters.Controls.Add(this.dateTimePickerFrom);
             this.panelFilters.Controls.Add(this.checkedListBoxFilterSearch);
             this.panelFilters.Controls.Add(this.textBoxSearch);
+            this.panelFilters.Controls.Add(this.buttonInsertLog);
+            this.panelFilters.Controls.Add(this.buttonUpdateLog);
             this.panelFilters.Controls.Add(this.buttonClear);
             this.panelFilters.Controls.Add(this.buttonSearch);
             this.panelFilters.Controls.Add(this.buttonFiltersSpoiler);
@@ -204,6 +209,7 @@
             // 
             // listBoxServicesFilter
             // 
+            this.listBoxServicesFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.listBoxServicesFilter.FormattingEnabled = true;
             this.listBoxServicesFilter.Location = new System.Drawing.Point(880, 50);
             this.listBoxServicesFilter.Name = "listBoxServicesFilter";
@@ -214,6 +220,7 @@
             // 
             // listBoxSparesFilter
             // 
+            this.listBoxSparesFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.listBoxSparesFilter.FormattingEnabled = true;
             this.listBoxSparesFilter.Location = new System.Drawing.Point(763, 50);
             this.listBoxSparesFilter.Name = "listBoxSparesFilter";
@@ -224,6 +231,7 @@
             // 
             // label10
             // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Roboto Cn", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label10.Location = new System.Drawing.Point(907, 31);
@@ -234,6 +242,7 @@
             // 
             // label7
             // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Roboto Cn", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label7.Location = new System.Drawing.Point(788, 31);
@@ -244,6 +253,7 @@
             // 
             // listBoxModelsFilter
             // 
+            this.listBoxModelsFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.listBoxModelsFilter.FormattingEnabled = true;
             this.listBoxModelsFilter.Location = new System.Drawing.Point(646, 50);
             this.listBoxModelsFilter.Name = "listBoxModelsFilter";
@@ -254,6 +264,7 @@
             // 
             // listBoxDeptsFilter
             // 
+            this.listBoxDeptsFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.listBoxDeptsFilter.FormattingEnabled = true;
             this.listBoxDeptsFilter.Location = new System.Drawing.Point(411, 128);
             this.listBoxDeptsFilter.Name = "listBoxDeptsFilter";
@@ -264,6 +275,7 @@
             // 
             // listBoxTypesFilter
             // 
+            this.listBoxTypesFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.listBoxTypesFilter.FormattingEnabled = true;
             this.listBoxTypesFilter.Location = new System.Drawing.Point(529, 50);
             this.listBoxTypesFilter.Name = "listBoxTypesFilter";
@@ -274,6 +286,7 @@
             // 
             // label8
             // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Roboto Cn", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label8.Location = new System.Drawing.Point(539, 31);
@@ -284,6 +297,7 @@
             // 
             // listBoxRepairersFilter
             // 
+            this.listBoxRepairersFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.listBoxRepairersFilter.FormattingEnabled = true;
             this.listBoxRepairersFilter.Location = new System.Drawing.Point(411, 50);
             this.listBoxRepairersFilter.Name = "listBoxRepairersFilter";
@@ -294,6 +308,7 @@
             // 
             // label5
             // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Roboto Cn", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label5.Location = new System.Drawing.Point(431, 31);
@@ -304,6 +319,7 @@
             // 
             // label9
             // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Roboto Cn", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label9.Location = new System.Drawing.Point(649, 31);
@@ -314,6 +330,7 @@
             // 
             // listBoxStatusesFilter
             // 
+            this.listBoxStatusesFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.listBoxStatusesFilter.FormattingEnabled = true;
             this.listBoxStatusesFilter.Location = new System.Drawing.Point(253, 128);
             this.listBoxStatusesFilter.Name = "listBoxStatusesFilter";
@@ -324,6 +341,7 @@
             // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Roboto Cn", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label4.Location = new System.Drawing.Point(440, 109);
@@ -334,6 +352,7 @@
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Roboto Cn", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.Location = new System.Drawing.Point(273, 109);
@@ -344,6 +363,7 @@
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Roboto Cn", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(250, 89);
@@ -354,6 +374,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Roboto Cn", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(250, 63);
@@ -364,6 +385,7 @@
             // 
             // dateTimePickerBefore
             // 
+            this.dateTimePickerBefore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.dateTimePickerBefore.CalendarFont = new System.Drawing.Font("Roboto Cn", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dateTimePickerBefore.Location = new System.Drawing.Point(275, 86);
             this.dateTimePickerBefore.MaxDate = new System.DateTime(3000, 1, 1, 0, 0, 0, 0);
@@ -375,6 +397,7 @@
             // 
             // dateTimePickerFrom
             // 
+            this.dateTimePickerFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.dateTimePickerFrom.CalendarFont = new System.Drawing.Font("Roboto Cn", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dateTimePickerFrom.Location = new System.Drawing.Point(275, 60);
             this.dateTimePickerFrom.MaxDate = new System.DateTime(3000, 1, 1, 0, 0, 0, 0);
@@ -387,6 +410,7 @@
             // 
             // checkedListBoxFilterSearch
             // 
+            this.checkedListBoxFilterSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.checkedListBoxFilterSearch.Font = new System.Drawing.Font("Roboto Cn", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.checkedListBoxFilterSearch.FormattingEnabled = true;
             this.checkedListBoxFilterSearch.Items.AddRange(new object[] {
@@ -394,16 +418,15 @@
             "Серийный номер",
             "Модель устройства",
             "Тип устройства",
-            "Исполнитель",
-            "Запчасть",
-            "Работа"});
+            "Исполнитель"});
             this.checkedListBoxFilterSearch.Location = new System.Drawing.Point(3, 60);
             this.checkedListBoxFilterSearch.Name = "checkedListBoxFilterSearch";
-            this.checkedListBoxFilterSearch.Size = new System.Drawing.Size(244, 137);
+            this.checkedListBoxFilterSearch.Size = new System.Drawing.Size(244, 99);
             this.checkedListBoxFilterSearch.TabIndex = 2;
             // 
             // textBoxSearch
             // 
+            this.textBoxSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.textBoxSearch.Location = new System.Drawing.Point(3, 31);
             this.textBoxSearch.Name = "textBoxSearch";
             this.textBoxSearch.Size = new System.Drawing.Size(163, 20);
@@ -411,6 +434,7 @@
             // 
             // buttonClear
             // 
+            this.buttonClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.buttonClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
             this.buttonClear.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonClear.Font = new System.Drawing.Font("Roboto Cn", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -424,6 +448,7 @@
             // 
             // buttonSearch
             // 
+            this.buttonSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.buttonSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
             this.buttonSearch.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonSearch.Font = new System.Drawing.Font("Roboto Cn", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -445,7 +470,7 @@
             this.buttonFiltersSpoiler.Font = new System.Drawing.Font("Roboto Cn", 10F, System.Drawing.FontStyle.Bold);
             this.buttonFiltersSpoiler.ForeColor = System.Drawing.Color.White;
             this.buttonFiltersSpoiler.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.buttonFiltersSpoiler.Location = new System.Drawing.Point(0, 0);
+            this.buttonFiltersSpoiler.Location = new System.Drawing.Point(-1, -1);
             this.buttonFiltersSpoiler.Margin = new System.Windows.Forms.Padding(0);
             this.buttonFiltersSpoiler.Name = "buttonFiltersSpoiler";
             this.buttonFiltersSpoiler.Size = new System.Drawing.Size(998, 24);
@@ -453,6 +478,7 @@
             this.buttonFiltersSpoiler.Text = "Фильтры";
             this.buttonFiltersSpoiler.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.buttonFiltersSpoiler.UseVisualStyleBackColor = false;
+            this.buttonFiltersSpoiler.Click += new System.EventHandler(this.buttonFiltersSpoiler_Click);
             // 
             // panelParameters
             // 
@@ -483,14 +509,13 @@
             this.dataGridViewServices.RowHeadersVisible = false;
             this.dataGridViewServices.Size = new System.Drawing.Size(266, 162);
             this.dataGridViewServices.TabIndex = 0;
+            this.dataGridViewServices.TabStop = false;
             // 
             // dataGridViewSpares
             // 
             this.dataGridViewSpares.AllowUserToAddRows = false;
             this.dataGridViewSpares.AllowUserToDeleteRows = false;
-            this.dataGridViewSpares.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewSpares.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewSpares.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewSpares.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
             this.dataGridViewSpares.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -500,6 +525,7 @@
             this.dataGridViewSpares.RowHeadersVisible = false;
             this.dataGridViewSpares.Size = new System.Drawing.Size(266, 162);
             this.dataGridViewSpares.TabIndex = 0;
+            this.dataGridViewSpares.TabStop = false;
             // 
             // dataGridViewParameters
             // 
@@ -518,6 +544,7 @@
             this.dataGridViewParameters.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dataGridViewParameters.Size = new System.Drawing.Size(266, 162);
             this.dataGridViewParameters.TabIndex = 0;
+            this.dataGridViewParameters.TabStop = false;
             // 
             // buttonParametersSpoiler
             // 
@@ -535,6 +562,34 @@
             this.buttonParametersSpoiler.Text = "<<<Параметры<<<";
             this.buttonParametersSpoiler.UseVisualStyleBackColor = false;
             this.buttonParametersSpoiler.Click += new System.EventHandler(this.buttonParametersSpoiler_Click);
+            // 
+            // buttonUpdateLog
+            // 
+            this.buttonUpdateLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.buttonUpdateLog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
+            this.buttonUpdateLog.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonUpdateLog.Font = new System.Drawing.Font("Roboto Cn", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonUpdateLog.Location = new System.Drawing.Point(3, 165);
+            this.buttonUpdateLog.Name = "buttonUpdateLog";
+            this.buttonUpdateLog.Size = new System.Drawing.Size(120, 32);
+            this.buttonUpdateLog.TabIndex = 14;
+            this.buttonUpdateLog.Text = "Изменить запись";
+            this.buttonUpdateLog.UseVisualStyleBackColor = false;
+            this.buttonUpdateLog.Click += new System.EventHandler(this.buttonClear_Click);
+            // 
+            // buttonInsertLog
+            // 
+            this.buttonInsertLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.buttonInsertLog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
+            this.buttonInsertLog.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonInsertLog.Font = new System.Drawing.Font("Roboto Cn", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonInsertLog.Location = new System.Drawing.Point(127, 165);
+            this.buttonInsertLog.Name = "buttonInsertLog";
+            this.buttonInsertLog.Size = new System.Drawing.Size(120, 32);
+            this.buttonInsertLog.TabIndex = 15;
+            this.buttonInsertLog.Text = "Добавить новую";
+            this.buttonInsertLog.UseVisualStyleBackColor = false;
+            this.buttonInsertLog.Click += new System.EventHandler(this.buttonClear_Click);
             // 
             // MainForm
             // 
@@ -605,6 +660,8 @@
         private System.Windows.Forms.ListBox listBoxTypesFilter;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button buttonInsertLog;
+        private System.Windows.Forms.Button buttonUpdateLog;
     }
 }
 
