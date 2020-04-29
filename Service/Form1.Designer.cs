@@ -58,6 +58,8 @@
             this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
             this.checkedListBoxFilterSearch = new System.Windows.Forms.CheckedListBox();
             this.textBoxSearch = new System.Windows.Forms.TextBox();
+            this.buttonInsertLog = new System.Windows.Forms.Button();
+            this.buttonUpdateLog = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.buttonFiltersSpoiler = new System.Windows.Forms.Button();
@@ -66,8 +68,6 @@
             this.dataGridViewSpares = new System.Windows.Forms.DataGridView();
             this.dataGridViewParameters = new System.Windows.Forms.DataGridView();
             this.buttonParametersSpoiler = new System.Windows.Forms.Button();
-            this.buttonUpdateLog = new System.Windows.Forms.Button();
-            this.buttonInsertLog = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewServiceLog)).BeginInit();
             this.panelFilters.SuspendLayout();
@@ -432,6 +432,33 @@
             this.textBoxSearch.Size = new System.Drawing.Size(163, 20);
             this.textBoxSearch.TabIndex = 1;
             // 
+            // buttonInsertLog
+            // 
+            this.buttonInsertLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.buttonInsertLog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
+            this.buttonInsertLog.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonInsertLog.Font = new System.Drawing.Font("Roboto Cn", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonInsertLog.Location = new System.Drawing.Point(127, 165);
+            this.buttonInsertLog.Name = "buttonInsertLog";
+            this.buttonInsertLog.Size = new System.Drawing.Size(120, 32);
+            this.buttonInsertLog.TabIndex = 15;
+            this.buttonInsertLog.Text = "Добавить запись";
+            this.buttonInsertLog.UseVisualStyleBackColor = false;
+            this.buttonInsertLog.Click += new System.EventHandler(this.buttonInsertLog_Click);
+            // 
+            // buttonUpdateLog
+            // 
+            this.buttonUpdateLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.buttonUpdateLog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
+            this.buttonUpdateLog.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonUpdateLog.Font = new System.Drawing.Font("Roboto Cn", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonUpdateLog.Location = new System.Drawing.Point(3, 165);
+            this.buttonUpdateLog.Name = "buttonUpdateLog";
+            this.buttonUpdateLog.Size = new System.Drawing.Size(120, 32);
+            this.buttonUpdateLog.TabIndex = 14;
+            this.buttonUpdateLog.Text = "Изменить запись";
+            this.buttonUpdateLog.UseVisualStyleBackColor = false;
+            // 
             // buttonClear
             // 
             this.buttonClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
@@ -562,34 +589,6 @@
             this.buttonParametersSpoiler.Text = "<<<Параметры<<<";
             this.buttonParametersSpoiler.UseVisualStyleBackColor = false;
             this.buttonParametersSpoiler.Click += new System.EventHandler(this.buttonParametersSpoiler_Click);
-            // 
-            // buttonUpdateLog
-            // 
-            this.buttonUpdateLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.buttonUpdateLog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
-            this.buttonUpdateLog.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonUpdateLog.Font = new System.Drawing.Font("Roboto Cn", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonUpdateLog.Location = new System.Drawing.Point(3, 165);
-            this.buttonUpdateLog.Name = "buttonUpdateLog";
-            this.buttonUpdateLog.Size = new System.Drawing.Size(120, 32);
-            this.buttonUpdateLog.TabIndex = 14;
-            this.buttonUpdateLog.Text = "Изменить запись";
-            this.buttonUpdateLog.UseVisualStyleBackColor = false;
-            this.buttonUpdateLog.Click += new System.EventHandler(this.buttonClear_Click);
-            // 
-            // buttonInsertLog
-            // 
-            this.buttonInsertLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.buttonInsertLog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
-            this.buttonInsertLog.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonInsertLog.Font = new System.Drawing.Font("Roboto Cn", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonInsertLog.Location = new System.Drawing.Point(127, 165);
-            this.buttonInsertLog.Name = "buttonInsertLog";
-            this.buttonInsertLog.Size = new System.Drawing.Size(120, 32);
-            this.buttonInsertLog.TabIndex = 15;
-            this.buttonInsertLog.Text = "Добавить новую";
-            this.buttonInsertLog.UseVisualStyleBackColor = false;
-            this.buttonInsertLog.Click += new System.EventHandler(this.buttonClear_Click);
             // 
             // MainForm
             // 

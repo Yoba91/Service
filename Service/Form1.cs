@@ -29,8 +29,8 @@ namespace Service
         List<Service> services;
         List<ServiceForModel> servicesForModels;
         List<ServiceDone> serviceDones;
-        Dictionary<int, ServiceLog> DGVRows;
         List<ServiceLog> releaseLogs;
+        Dictionary<int, ServiceLog> DGVRows;
         Dictionary<int, Status> statusFilters;
         Dictionary<int, Repairer> repairerFilters;
         Dictionary<int, Dept> deptFilters;
@@ -751,5 +751,11 @@ namespace Service
             }
         }
         #endregion
+
+        private void buttonInsertLog_Click(object sender, EventArgs e)
+        {
+            InsertServiceLog newInsertForm = new InsertServiceLog();
+            newInsertForm.ShowDialog();
+        }
     }
 }

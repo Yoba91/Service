@@ -164,6 +164,10 @@ namespace Service
     #region Устройство (Device)
     public class Device
     {
+        public Device()
+        {
+
+        }
         public Device(int rowid, Model model, Dept dept, Status status, String serialNumber, String inventoryNumber)
         {
             RowId = rowid;
