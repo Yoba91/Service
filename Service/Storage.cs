@@ -53,6 +53,8 @@ namespace Service
     #region Отдел (Dept)
     public class Dept
     {
+        public Dept()
+        { }
         public Dept(int rowid, String name, String code, String description)
         {
             RowId = rowid;
@@ -73,6 +75,9 @@ namespace Service
     #region Ремонтник (Repairer)
     public class Repairer
     {
+        public Repairer()
+        {
+        }
         public Repairer(int rowid, String name, String surname, String midname, String password)
         {
             RowId = rowid;
@@ -95,6 +100,8 @@ namespace Service
     #region Модель устройста (Model)
     public class Model
     {
+        public Model()
+        { }
         public Model(int rowid, String fullName, String shortName, TypeModel type)
         {
             RowId = rowid;
@@ -117,6 +124,8 @@ namespace Service
     #region Тип устройста (TypeModel)
     public class TypeModel
     {
+        public TypeModel()
+        { }
         public TypeModel(int rowid, String fullName, String shortName)
         {
             RowId = rowid;
@@ -136,6 +145,9 @@ namespace Service
     #region Статусы (Status)
     public class Status
     {
+        public Status()
+        {
+        }
         public Status(int rowid, String name)
         {
             RowId = rowid;
@@ -264,6 +276,8 @@ namespace Service
     #region Запчасти (Spares)
     public class Spares
     {
+        public Spares()
+        { }
         public Spares(int rowid, String name, String description)
         {
             RowId = rowid;
@@ -320,6 +334,8 @@ namespace Service
     #region Работы (Service)
     public class Service
     {
+        public Service()
+        { }
         public Service(int rowid, String fullName, String shortName, String description)
         {
             RowId = rowid;

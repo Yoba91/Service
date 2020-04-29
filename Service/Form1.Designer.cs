@@ -38,34 +38,34 @@
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridViewServiceLog = new System.Windows.Forms.DataGridView();
             this.panelFilters = new System.Windows.Forms.Panel();
+            this.listBoxServicesFilter = new System.Windows.Forms.ListBox();
+            this.listBoxSparesFilter = new System.Windows.Forms.ListBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.listBoxModelsFilter = new System.Windows.Forms.ListBox();
+            this.listBoxDeptsFilter = new System.Windows.Forms.ListBox();
+            this.listBoxTypesFilter = new System.Windows.Forms.ListBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.listBoxRepairersFilter = new System.Windows.Forms.ListBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.listBoxStatusesFilter = new System.Windows.Forms.ListBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dateTimePickerBefore = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
             this.checkedListBoxFilterSearch = new System.Windows.Forms.CheckedListBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.textBoxSearch = new System.Windows.Forms.TextBox();
+            this.buttonClear = new System.Windows.Forms.Button();
+            this.buttonSearch = new System.Windows.Forms.Button();
+            this.buttonFiltersSpoiler = new System.Windows.Forms.Button();
             this.panelParameters = new System.Windows.Forms.Panel();
             this.dataGridViewServices = new System.Windows.Forms.DataGridView();
             this.dataGridViewSpares = new System.Windows.Forms.DataGridView();
             this.dataGridViewParameters = new System.Windows.Forms.DataGridView();
             this.buttonParametersSpoiler = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.listBoxStatusesFilter = new System.Windows.Forms.ListBox();
-            this.listBoxRepairersFilter = new System.Windows.Forms.ListBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.listBoxDeptsFilter = new System.Windows.Forms.ListBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.listBoxSparesFilter = new System.Windows.Forms.ListBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.listBoxTypesFilter = new System.Windows.Forms.ListBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.listBoxModelsFilter = new System.Windows.Forms.ListBox();
-            this.listBoxServicesFilter = new System.Windows.Forms.ListBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewServiceLog)).BeginInit();
             this.panelFilters.SuspendLayout();
@@ -164,7 +164,7 @@
             this.dataGridViewServiceLog.ReadOnly = true;
             this.dataGridViewServiceLog.RowHeadersVisible = false;
             this.dataGridViewServiceLog.Size = new System.Drawing.Size(705, 488);
-            this.dataGridViewServiceLog.TabIndex = 1;
+            this.dataGridViewServiceLog.TabIndex = 0;
             this.dataGridViewServiceLog.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewServiceLog_CellClick);
             this.dataGridViewServiceLog.Paint += new System.Windows.Forms.PaintEventHandler(this.dataGridViewServiceLog_Paint);
             // 
@@ -193,14 +193,154 @@
             this.panelFilters.Controls.Add(this.dateTimePickerBefore);
             this.panelFilters.Controls.Add(this.dateTimePickerFrom);
             this.panelFilters.Controls.Add(this.checkedListBoxFilterSearch);
-            this.panelFilters.Controls.Add(this.textBox1);
-            this.panelFilters.Controls.Add(this.button3);
-            this.panelFilters.Controls.Add(this.button1);
-            this.panelFilters.Controls.Add(this.button2);
+            this.panelFilters.Controls.Add(this.textBoxSearch);
+            this.panelFilters.Controls.Add(this.buttonClear);
+            this.panelFilters.Controls.Add(this.buttonSearch);
+            this.panelFilters.Controls.Add(this.buttonFiltersSpoiler);
             this.panelFilters.Location = new System.Drawing.Point(5, 522);
             this.panelFilters.Name = "panelFilters";
             this.panelFilters.Size = new System.Drawing.Size(998, 203);
             this.panelFilters.TabIndex = 2;
+            // 
+            // listBoxServicesFilter
+            // 
+            this.listBoxServicesFilter.FormattingEnabled = true;
+            this.listBoxServicesFilter.Location = new System.Drawing.Point(880, 50);
+            this.listBoxServicesFilter.Name = "listBoxServicesFilter";
+            this.listBoxServicesFilter.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.listBoxServicesFilter.Size = new System.Drawing.Size(112, 147);
+            this.listBoxServicesFilter.TabIndex = 13;
+            this.listBoxServicesFilter.SelectedIndexChanged += new System.EventHandler(this.listBoxServicesFilter_SelectedIndexChanged);
+            // 
+            // listBoxSparesFilter
+            // 
+            this.listBoxSparesFilter.FormattingEnabled = true;
+            this.listBoxSparesFilter.Location = new System.Drawing.Point(763, 50);
+            this.listBoxSparesFilter.Name = "listBoxSparesFilter";
+            this.listBoxSparesFilter.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.listBoxSparesFilter.Size = new System.Drawing.Size(112, 147);
+            this.listBoxSparesFilter.TabIndex = 12;
+            this.listBoxSparesFilter.SelectedIndexChanged += new System.EventHandler(this.listBoxSparesFilter_SelectedIndexChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Roboto Cn", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label10.Location = new System.Drawing.Point(907, 31);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(50, 15);
+            this.label10.TabIndex = 7;
+            this.label10.Text = "Работы:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Roboto Cn", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label7.Location = new System.Drawing.Point(788, 31);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(60, 15);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "Запчасти:";
+            // 
+            // listBoxModelsFilter
+            // 
+            this.listBoxModelsFilter.FormattingEnabled = true;
+            this.listBoxModelsFilter.Location = new System.Drawing.Point(646, 50);
+            this.listBoxModelsFilter.Name = "listBoxModelsFilter";
+            this.listBoxModelsFilter.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.listBoxModelsFilter.Size = new System.Drawing.Size(112, 147);
+            this.listBoxModelsFilter.TabIndex = 11;
+            this.listBoxModelsFilter.SelectedIndexChanged += new System.EventHandler(this.listBoxModelsFilter_SelectedIndexChanged);
+            // 
+            // listBoxDeptsFilter
+            // 
+            this.listBoxDeptsFilter.FormattingEnabled = true;
+            this.listBoxDeptsFilter.Location = new System.Drawing.Point(411, 128);
+            this.listBoxDeptsFilter.Name = "listBoxDeptsFilter";
+            this.listBoxDeptsFilter.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.listBoxDeptsFilter.Size = new System.Drawing.Size(112, 69);
+            this.listBoxDeptsFilter.TabIndex = 9;
+            this.listBoxDeptsFilter.SelectedIndexChanged += new System.EventHandler(this.listBoxDeptsFilter_SelectedIndexChanged);
+            // 
+            // listBoxTypesFilter
+            // 
+            this.listBoxTypesFilter.FormattingEnabled = true;
+            this.listBoxTypesFilter.Location = new System.Drawing.Point(529, 50);
+            this.listBoxTypesFilter.Name = "listBoxTypesFilter";
+            this.listBoxTypesFilter.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.listBoxTypesFilter.Size = new System.Drawing.Size(112, 147);
+            this.listBoxTypesFilter.TabIndex = 10;
+            this.listBoxTypesFilter.SelectedIndexChanged += new System.EventHandler(this.listBoxTypesFilter_SelectedIndexChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Roboto Cn", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label8.Location = new System.Drawing.Point(539, 31);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(95, 15);
+            this.label8.TabIndex = 7;
+            this.label8.Text = "Типы устройств:";
+            // 
+            // listBoxRepairersFilter
+            // 
+            this.listBoxRepairersFilter.FormattingEnabled = true;
+            this.listBoxRepairersFilter.Location = new System.Drawing.Point(411, 50);
+            this.listBoxRepairersFilter.Name = "listBoxRepairersFilter";
+            this.listBoxRepairersFilter.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.listBoxRepairersFilter.Size = new System.Drawing.Size(112, 56);
+            this.listBoxRepairersFilter.TabIndex = 8;
+            this.listBoxRepairersFilter.SelectedIndexChanged += new System.EventHandler(this.listBoxRepairersFilter_SelectedIndexChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Roboto Cn", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.Location = new System.Drawing.Point(431, 31);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(78, 15);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Исполнители:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Roboto Cn", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label9.Location = new System.Drawing.Point(649, 31);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(107, 15);
+            this.label9.TabIndex = 7;
+            this.label9.Text = "Модели устройств:";
+            // 
+            // listBoxStatusesFilter
+            // 
+            this.listBoxStatusesFilter.FormattingEnabled = true;
+            this.listBoxStatusesFilter.Location = new System.Drawing.Point(253, 128);
+            this.listBoxStatusesFilter.Name = "listBoxStatusesFilter";
+            this.listBoxStatusesFilter.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.listBoxStatusesFilter.Size = new System.Drawing.Size(152, 69);
+            this.listBoxStatusesFilter.TabIndex = 7;
+            this.listBoxStatusesFilter.SelectedIndexChanged += new System.EventHandler(this.listBoxStatusesFilter_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Roboto Cn", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Location = new System.Drawing.Point(440, 109);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(52, 15);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Отделы:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Roboto Cn", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(273, 109);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(113, 15);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Статусы устройств:";
             // 
             // label2
             // 
@@ -241,7 +381,8 @@
             this.dateTimePickerFrom.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.dateTimePickerFrom.Name = "dateTimePickerFrom";
             this.dateTimePickerFrom.Size = new System.Drawing.Size(130, 20);
-            this.dateTimePickerFrom.TabIndex = 6;
+            this.dateTimePickerFrom.TabIndex = 5;
+            this.dateTimePickerFrom.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.dateTimePickerFrom.ValueChanged += new System.EventHandler(this.dateTimePickerFrom_ValueChanged);
             // 
             // checkedListBoxFilterSearch
@@ -259,57 +400,59 @@
             this.checkedListBoxFilterSearch.Location = new System.Drawing.Point(3, 60);
             this.checkedListBoxFilterSearch.Name = "checkedListBoxFilterSearch";
             this.checkedListBoxFilterSearch.Size = new System.Drawing.Size(244, 137);
-            this.checkedListBoxFilterSearch.TabIndex = 4;
+            this.checkedListBoxFilterSearch.TabIndex = 2;
             // 
-            // textBox1
+            // textBoxSearch
             // 
-            this.textBox1.Location = new System.Drawing.Point(3, 31);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(163, 20);
-            this.textBox1.TabIndex = 3;
+            this.textBoxSearch.Location = new System.Drawing.Point(3, 31);
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Size = new System.Drawing.Size(163, 20);
+            this.textBoxSearch.TabIndex = 1;
             // 
-            // button3
+            // buttonClear
             // 
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button3.Font = new System.Drawing.Font("Roboto Cn", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button3.Location = new System.Drawing.Point(253, 30);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(152, 23);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "Сброс результатов";
-            this.button3.UseVisualStyleBackColor = false;
+            this.buttonClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
+            this.buttonClear.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonClear.Font = new System.Drawing.Font("Roboto Cn", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonClear.Location = new System.Drawing.Point(253, 30);
+            this.buttonClear.Name = "buttonClear";
+            this.buttonClear.Size = new System.Drawing.Size(152, 23);
+            this.buttonClear.TabIndex = 4;
+            this.buttonClear.Text = "Сброс результатов";
+            this.buttonClear.UseVisualStyleBackColor = false;
+            this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
             // 
-            // button1
+            // buttonSearch
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Font = new System.Drawing.Font("Roboto Cn", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(172, 30);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Поиск";
-            this.button1.UseVisualStyleBackColor = false;
+            this.buttonSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
+            this.buttonSearch.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonSearch.Font = new System.Drawing.Font("Roboto Cn", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonSearch.Location = new System.Drawing.Point(172, 30);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(75, 23);
+            this.buttonSearch.TabIndex = 3;
+            this.buttonSearch.Text = "Поиск";
+            this.buttonSearch.UseVisualStyleBackColor = false;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
-            // button2
+            // buttonFiltersSpoiler
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.buttonFiltersSpoiler.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(150)))), ((int)(((byte)(47)))));
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Roboto Cn", 10F, System.Drawing.FontStyle.Bold);
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button2.Location = new System.Drawing.Point(0, 0);
-            this.button2.Margin = new System.Windows.Forms.Padding(0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(998, 24);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Фильтры";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button2.UseVisualStyleBackColor = false;
+            this.buttonFiltersSpoiler.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(150)))), ((int)(((byte)(47)))));
+            this.buttonFiltersSpoiler.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonFiltersSpoiler.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonFiltersSpoiler.Font = new System.Drawing.Font("Roboto Cn", 10F, System.Drawing.FontStyle.Bold);
+            this.buttonFiltersSpoiler.ForeColor = System.Drawing.Color.White;
+            this.buttonFiltersSpoiler.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.buttonFiltersSpoiler.Location = new System.Drawing.Point(0, 0);
+            this.buttonFiltersSpoiler.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonFiltersSpoiler.Name = "buttonFiltersSpoiler";
+            this.buttonFiltersSpoiler.Size = new System.Drawing.Size(998, 24);
+            this.buttonFiltersSpoiler.TabIndex = 1;
+            this.buttonFiltersSpoiler.Text = "Фильтры";
+            this.buttonFiltersSpoiler.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.buttonFiltersSpoiler.UseVisualStyleBackColor = false;
             // 
             // panelParameters
             // 
@@ -339,7 +482,7 @@
             this.dataGridViewServices.ReadOnly = true;
             this.dataGridViewServices.RowHeadersVisible = false;
             this.dataGridViewServices.Size = new System.Drawing.Size(266, 162);
-            this.dataGridViewServices.TabIndex = 1;
+            this.dataGridViewServices.TabIndex = 0;
             // 
             // dataGridViewSpares
             // 
@@ -356,7 +499,7 @@
             this.dataGridViewSpares.ReadOnly = true;
             this.dataGridViewSpares.RowHeadersVisible = false;
             this.dataGridViewSpares.Size = new System.Drawing.Size(266, 162);
-            this.dataGridViewSpares.TabIndex = 1;
+            this.dataGridViewSpares.TabIndex = 0;
             // 
             // dataGridViewParameters
             // 
@@ -374,7 +517,7 @@
             this.dataGridViewParameters.RowHeadersVisible = false;
             this.dataGridViewParameters.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dataGridViewParameters.Size = new System.Drawing.Size(266, 162);
-            this.dataGridViewParameters.TabIndex = 1;
+            this.dataGridViewParameters.TabIndex = 0;
             // 
             // buttonParametersSpoiler
             // 
@@ -392,140 +535,6 @@
             this.buttonParametersSpoiler.Text = "<<<Параметры<<<";
             this.buttonParametersSpoiler.UseVisualStyleBackColor = false;
             this.buttonParametersSpoiler.Click += new System.EventHandler(this.buttonParametersSpoiler_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Roboto Cn", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(273, 109);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(113, 15);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Статусы устройств:";
-            // 
-            // listBoxStatusesFilter
-            // 
-            this.listBoxStatusesFilter.FormattingEnabled = true;
-            this.listBoxStatusesFilter.Location = new System.Drawing.Point(253, 128);
-            this.listBoxStatusesFilter.Name = "listBoxStatusesFilter";
-            this.listBoxStatusesFilter.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBoxStatusesFilter.Size = new System.Drawing.Size(152, 69);
-            this.listBoxStatusesFilter.TabIndex = 8;
-            this.listBoxStatusesFilter.SelectedIndexChanged += new System.EventHandler(this.listBoxStatusesFilter_SelectedIndexChanged);
-            // 
-            // listBoxRepairersFilter
-            // 
-            this.listBoxRepairersFilter.FormattingEnabled = true;
-            this.listBoxRepairersFilter.Location = new System.Drawing.Point(411, 50);
-            this.listBoxRepairersFilter.Name = "listBoxRepairersFilter";
-            this.listBoxRepairersFilter.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBoxRepairersFilter.Size = new System.Drawing.Size(112, 56);
-            this.listBoxRepairersFilter.TabIndex = 8;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Roboto Cn", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(440, 109);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(52, 15);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Отделы:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Roboto Cn", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(431, 31);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(78, 15);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Исполнители:";
-            // 
-            // listBoxDeptsFilter
-            // 
-            this.listBoxDeptsFilter.FormattingEnabled = true;
-            this.listBoxDeptsFilter.Location = new System.Drawing.Point(411, 128);
-            this.listBoxDeptsFilter.Name = "listBoxDeptsFilter";
-            this.listBoxDeptsFilter.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBoxDeptsFilter.Size = new System.Drawing.Size(112, 69);
-            this.listBoxDeptsFilter.TabIndex = 8;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Roboto Cn", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(788, 31);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(60, 15);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "Запчасти:";
-            // 
-            // listBoxSparesFilter
-            // 
-            this.listBoxSparesFilter.FormattingEnabled = true;
-            this.listBoxSparesFilter.Location = new System.Drawing.Point(763, 50);
-            this.listBoxSparesFilter.Name = "listBoxSparesFilter";
-            this.listBoxSparesFilter.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBoxSparesFilter.Size = new System.Drawing.Size(112, 147);
-            this.listBoxSparesFilter.TabIndex = 8;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Roboto Cn", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label8.Location = new System.Drawing.Point(539, 31);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(95, 15);
-            this.label8.TabIndex = 7;
-            this.label8.Text = "Типы устройств:";
-            // 
-            // listBoxTypesFilter
-            // 
-            this.listBoxTypesFilter.FormattingEnabled = true;
-            this.listBoxTypesFilter.Location = new System.Drawing.Point(529, 50);
-            this.listBoxTypesFilter.Name = "listBoxTypesFilter";
-            this.listBoxTypesFilter.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBoxTypesFilter.Size = new System.Drawing.Size(112, 147);
-            this.listBoxTypesFilter.TabIndex = 8;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Roboto Cn", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label9.Location = new System.Drawing.Point(649, 31);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(107, 15);
-            this.label9.TabIndex = 7;
-            this.label9.Text = "Модели устройств:";
-            // 
-            // listBoxModelsFilter
-            // 
-            this.listBoxModelsFilter.FormattingEnabled = true;
-            this.listBoxModelsFilter.Location = new System.Drawing.Point(646, 50);
-            this.listBoxModelsFilter.Name = "listBoxModelsFilter";
-            this.listBoxModelsFilter.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBoxModelsFilter.Size = new System.Drawing.Size(112, 147);
-            this.listBoxModelsFilter.TabIndex = 8;
-            // 
-            // listBoxServicesFilter
-            // 
-            this.listBoxServicesFilter.FormattingEnabled = true;
-            this.listBoxServicesFilter.Location = new System.Drawing.Point(880, 50);
-            this.listBoxServicesFilter.Name = "listBoxServicesFilter";
-            this.listBoxServicesFilter.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBoxServicesFilter.Size = new System.Drawing.Size(112, 147);
-            this.listBoxServicesFilter.TabIndex = 8;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Roboto Cn", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label10.Location = new System.Drawing.Point(907, 31);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(50, 15);
-            this.label10.TabIndex = 7;
-            this.label10.Text = "Работы:";
             // 
             // MainForm
             // 
@@ -570,18 +579,18 @@
         private System.Windows.Forms.Panel panelFilters;
         private System.Windows.Forms.Panel panelParameters;
         private System.Windows.Forms.Button buttonParametersSpoiler;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonFiltersSpoiler;
         private System.Windows.Forms.DataGridView dataGridViewServices;
         private System.Windows.Forms.DataGridView dataGridViewSpares;
         private System.Windows.Forms.DataGridView dataGridViewParameters;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.CheckedListBox checkedListBoxFilterSearch;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dateTimePickerBefore;
         private System.Windows.Forms.DateTimePicker dateTimePickerFrom;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button buttonClear;
         private System.Windows.Forms.ListBox listBoxStatusesFilter;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ListBox listBoxSparesFilter;
