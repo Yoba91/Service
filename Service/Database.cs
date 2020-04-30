@@ -472,5 +472,86 @@ namespace Service
             MessageBox.Show("Запись добавлена в журнал.");
         }
         #endregion
+        #region Удалить запись из журнала
+        public void DeleteServiceLogToDB(ServiceLog log)
+        {
+            DataTable table = new DataTable();
+            sqlQuery = "Delete FROM serviceLog WHERE rowid=" + log.RowId + ";";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            sqlQuery = "Delete FROM parametersValues WHERE rowidServiceLog=" + log.RowId + ";";
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            sqlQuery = "Delete FROM sparesUsed WHERE rowidServiceLog=" + log.RowId + ";";
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            sqlQuery = "Delete FROM serviceDone WHERE rowidServiceLog=" + log.RowId + ";";
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            
+        }
+        #endregion
+
+        #region Добавить отдел
+        public void InsertDeptToDB(Dept dept)
+        {
+            DataTable table = new DataTable();
+            sqlQuery = "Insert INTO dept (name,code,description) VALUES ('" + dept.Name + "','" + dept.Code + "','" + dept.Description + "');";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();                        
+            dbConnect.Close();
+            MessageBox.Show("Добавлен новый отдел / заказчик.");
+        }
+        #endregion
+        #region Изменить отдел
+        public void UpdateDeptToDB(Dept dept)
+        {
+            DataTable table = new DataTable();
+            sqlQuery = "Update dept Set name='" + dept.Name + "',code='" + dept.Code + "',description='" + dept.Description + "' Where rowid="+dept.RowId+";";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Отдел / Заказчик изменен.");
+        }
+        #endregion
+        #region Удалить отдел
+        public void DeleteDeptToDB(Dept dept)
+        {
+            DataTable table = new DataTable();
+            sqlQuery = "Delete FROM dept WHERE rowid=" + dept.RowId + ";";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Отдел / Заказчик удален.");
+        }
+        #endregion
     }
 }

@@ -48,8 +48,10 @@ namespace Service
             releaseLogs = new List<ServiceLog>();
             foreach (ServiceLog serviceLog in serviceLogs)
                 releaseLogs.Add(serviceLog);
+            dateTimePickerFrom.Value = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
             InitializeDataFilters();
             DataGridViewServiceLogFill();
+            ApplyFilters();
         }
         #region Инициализация данных в поля фильтров
         public void InitializeDataFilters()
@@ -756,6 +758,45 @@ namespace Service
         {
             InsertServiceLog newInsertForm = new InsertServiceLog(this);
             newInsertForm.ShowDialog();
+        }
+
+        private void buttonDeleteLog_Click(object sender, EventArgs e)
+        {
+            if(dataGridViewServiceLog.SelectedRows.Count > 0)
+            {
+                ServiceLog serviceLog = new ServiceLog();
+                for (int index = 0; index < dataGridViewServiceLog.SelectedRows.Count; index++)
+                {
+                    if(DGVRows.TryGetValue(dataGridViewServiceLog.Rows.IndexOf(dataGridViewServiceLog.SelectedRows[index]), out serviceLog))
+                    {
+                        db.DeleteServiceLogToDB(serviceLog);
+                    }
+                }
+                MessageBox.Show("Запись удалена из журнала.");
+                SelectAllData();
+                InitializeDataFilters();
+                ApplyFilters();
+            }
+        }
+
+        private void добавитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Depts newDept = new Depts();
+            newDept.ShowDialog();
+        }
+
+        private void изменитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Depts newDept = new Depts(depts);
+            newDept.UpdateDept();
+            newDept.ShowDialog();
+        }
+
+        private void удалитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Depts newDept = new Depts(depts);
+            newDept.DeleteDept();
+            newDept.ShowDialog();
         }
     }
 }
