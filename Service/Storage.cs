@@ -196,6 +196,8 @@ namespace Service
     #region Журнал сервиса (ServiceLog)
     public class ServiceLog
     {
+        public ServiceLog()
+        { }
         public ServiceLog(int rowid, Device device, Date date, Repairer repairer)
         {
             RowId = rowid;
@@ -219,6 +221,8 @@ namespace Service
     #region Параметры устройста (Parameter)
     public class Parameter
     {
+        public Parameter()
+        { }
         public Parameter(int rowid, String name, String unit, String defaultValue)
         {
             RowId = rowid;

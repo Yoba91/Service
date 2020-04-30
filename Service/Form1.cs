@@ -433,7 +433,7 @@ namespace Service
             }
         }
         #region Применить фильтры
-        private void ApplyFilters()
+        public void ApplyFilters()
         {
             releaseLogs.Clear();
             List<ServiceLog> tempLog = new List<ServiceLog>();
@@ -754,7 +754,7 @@ namespace Service
 
         private void buttonInsertLog_Click(object sender, EventArgs e)
         {
-            InsertServiceLog newInsertForm = new InsertServiceLog();
+            InsertServiceLog newInsertForm = new InsertServiceLog(this);
             newInsertForm.ShowDialog();
         }
     }

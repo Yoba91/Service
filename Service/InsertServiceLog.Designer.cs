@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InsertServiceLog));
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.dataGridViewDevices = new System.Windows.Forms.DataGridView();
@@ -76,7 +77,6 @@
             this.dataGridViewDevices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewDevices.Size = new System.Drawing.Size(457, 164);
             this.dataGridViewDevices.TabIndex = 3;
-            this.dataGridViewDevices.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDevices_CellClick);
             this.dataGridViewDevices.SelectionChanged += new System.EventHandler(this.dataGridViewDevices_SelectionChanged);
             // 
             // dataGridViewParameters
@@ -123,6 +123,7 @@
             this.buttonInsert.TabIndex = 8;
             this.buttonInsert.Text = "Добавить";
             this.buttonInsert.UseVisualStyleBackColor = false;
+            this.buttonInsert.Click += new System.EventHandler(this.buttonInsert_Click);
             // 
             // dateTimePicker1
             // 
@@ -158,9 +159,13 @@
             this.Controls.Add(this.buttonClear);
             this.Controls.Add(this.buttonSearch);
             this.Controls.Add(this.textBoxSearch);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(483, 420);
+            this.MinimumSize = new System.Drawing.Size(483, 420);
             this.Name = "InsertServiceLog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "InsertServiceLog";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.InsertServiceLog_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDevices)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewParameters)).EndInit();
             this.ResumeLayout(false);

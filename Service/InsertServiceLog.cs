@@ -33,9 +33,11 @@ namespace Service
         Dictionary<int, Parameter> DGVRParameter;
         Dictionary<int, Spares> DGVRSpares;
         Dictionary<int, Service> DGVRService;
-        public InsertServiceLog()
+        MainForm form = new MainForm();
+        public InsertServiceLog(MainForm form)
         {
             InitializeComponent();
+            this.Text = "Добавить запись в журнал";
             SelectAllData();
             releaseDevices = new List<Device>();
             releaseParameters = new List<Parameter>();
@@ -48,8 +50,9 @@ namespace Service
             DGVRSpares = new Dictionary<int, Spares>();
             DGVRService = new Dictionary<int, Service>();
             dataGridViewDevicesFill();
+            this.form = form;
         }
-
+        #region Получить все данные из базы данных
         public void SelectAllData()
         {
             depts = new List<Dept>();
@@ -77,6 +80,7 @@ namespace Service
             services = db.SelectService();
             servicesForModels = db.SelectServiceForModel(models, services);
         }
+        #endregion
         #region Заполнение таблицы устройств
         public void dataGridViewDevicesFill()
         {
@@ -119,7 +123,7 @@ namespace Service
                 dataGridViewParameters[1, dataGridViewParameters.Rows.Count - 1].Value = parameter.Name;
                 dataGridViewParameters[2, dataGridViewParameters.Rows.Count - 1].Value = parameter.DefaultValue;
                 dataGridViewParameters[3, dataGridViewParameters.Rows.Count - 1].Value = parameter.Unit;
-                DGVRParameter.Add(dataGridViewDevices.Rows.Count - 1, parameter);
+                DGVRParameter.Add(dataGridViewParameters.Rows.Count - 1, parameter);
             }
         }
         #endregion
@@ -189,6 +193,23 @@ namespace Service
             }
         }
         #endregion
+        #region Собрать данные для занесения в базу данных
+        public ServiceLog GetServiceLogData()
+        {
+            Device device = new Device();
+            if (DGVRDevice.TryGetValue(dataGridViewDevices.SelectedCells[0].RowIndex, out device))
+            {
+                Date date = new Date(dateTimePicker1.Value.ToShortDateString());
+                Repairer repairer = new Repairer();
+                repairer = repairers[0];
+                //Изменить исполнителя на авторизованного
+                ServiceLog log = new ServiceLog(0, device, date, repairer);
+                return log;
+            }
+
+            return null;
+        }
+        #endregion
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             releaseDevices.Clear();
@@ -227,21 +248,99 @@ namespace Service
             dataGridViewDevicesFill();
         }
 
-
-        private void dataGridViewDevices_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            /*
-            SelectParameters();
-            SelectSpares();
-            SelectServices();
-            */
-        }
-
         private void dataGridViewDevices_SelectionChanged(object sender, EventArgs e)
         {
             SelectParameters();
             SelectSpares();
             SelectServices();
+        }
+
+        private void buttonInsert_Click(object sender, EventArgs e)
+        {
+            ServiceLog log = new ServiceLog();
+            List<ParametersValues> parametersValues = new List<ParametersValues>();
+            List<SparesUsed> sparesUseds = new List<SparesUsed>();
+            List<ServiceDone> serviceDones = new List<ServiceDone>();
+            if (dataGridViewDevices.SelectedRows.Count > 0)
+            {
+                log = GetServiceLogData();
+            }
+            if (dataGridViewParameters.Rows.Count > 0)
+            {
+                Parameter parameter = new Parameter();
+                for (int index = 0; index < dataGridViewParameters.Rows.Count; index++)
+                {
+                    if (DGVRParameter.TryGetValue(index, out parameter))
+                    {
+                        if (!dataGridViewParameters[2, index].Value.ToString().Equals(parameter.DefaultValue))
+                        {
+                            foreach (ParameterForModel parameterForModel in parametersForModels)
+                            {
+                                if ((parameter.RowId == parameterForModel.Parameter.RowId) && (log.Device.Model.RowId == parameterForModel.Model.RowId))
+                                {
+                                    parametersValues.Add(new ParametersValues(0, parameterForModel, log, dataGridViewParameters[2, index].Value.ToString()));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (listBoxSpares.SelectedItems.Count > 0)
+            {
+                Spares spare = new Spares();
+                for (int index = 0; index < listBoxSpares.SelectedItems.Count; index++)
+                {
+                    if (DGVRSpares.TryGetValue(listBoxSpares.Items.IndexOf(listBoxSpares.SelectedItems[index]), out spare))
+                    {
+                        foreach (SparesForModels sparesForModel in sparesForModels)
+                        {
+                            if ((spare.RowId == sparesForModel.Spare.RowId) && (log.Device.Model.RowId == sparesForModel.Model.RowId))
+                            {
+                                sparesUseds.Add(new SparesUsed(0, sparesForModel, log));
+                            }
+                        }
+                    }
+                }
+            }
+            if (listBoxServices.SelectedItems.Count > 0)
+            {
+                Service service = new Service();
+                for (int index = 0; index < listBoxServices.SelectedItems.Count; index++)
+                {
+                    if (DGVRService.TryGetValue(listBoxServices.Items.IndexOf(listBoxServices.SelectedItems[index]), out service))
+                    {
+                        foreach (ServiceForModel serviceForModel in servicesForModels)
+                        {
+                            if ((service.RowId == serviceForModel.Service.RowId) && (log.Device.Model.RowId == serviceForModel.Model.RowId))
+                            {
+                                serviceDones.Add(new ServiceDone(0, serviceForModel, log));
+                            }
+                        }
+                    }
+                }
+            }
+            if (log.RowId != 0)
+            {
+                MessageBox.Show("Выберите устройство");
+            }
+            else
+            {
+                if(serviceDones.Count == 0)
+                {
+                    MessageBox.Show("Выберите виды работ");
+                }
+                else
+                {
+                    db.InsertServiceLogToDB(log, parametersValues, sparesUseds, serviceDones);
+                }
+            }
+        }
+
+        private void InsertServiceLog_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            form.SelectAllData();
+            form.InitializeDataFilters();
+            form.ApplyFilters();
         }
     }
 }

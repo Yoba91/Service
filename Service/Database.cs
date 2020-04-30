@@ -429,5 +429,48 @@ namespace Service
             return sparesUsed;
         }
         #endregion
+
+        #region Добавить запись в журнил
+        public void InsertServiceLogToDB(ServiceLog log, List<ParametersValues> parametersValues, List<SparesUsed> sparesUsed, List<ServiceDone> serviceDones)
+        {
+            DataTable table = new DataTable();
+            sqlQuery = "Insert INTO serviceLog (rowidDevice,rowidRepairer,date) VALUES (" + log.Device.RowId + "," + log.Repairer.RowId + ",'" + log.Date.Value + "');";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            sqlQuery = "Select MAX(rowid) FROM serviceLog";
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, dbConnect);
+            adapter.Fill(table);
+            int rowId = int.Parse(table.Rows[0][0].ToString());
+            foreach(ParametersValues parameterValue in parametersValues)
+            {
+                sqlQuery = "Insert INTO parametersValues (rowidParametersForModels,rowidServiceLog,value) VALUES (" + parameterValue.ParameterForModel.RowId + "," + rowId + ",'" + parameterValue.Value + "');";
+                sqlCmd = dbConnect.CreateCommand();
+                sqlCmd.CommandText = sqlQuery;
+                sqlCmd.ExecuteNonQuery();
+            }
+            foreach (SparesUsed spareUsed in sparesUsed)
+            {
+                sqlQuery = "Insert INTO sparesUsed (rowidSparesForModels,rowidServiceLog) VALUES (" + spareUsed.SpareForModel.RowId + "," + rowId + ");";
+                sqlCmd = dbConnect.CreateCommand();
+                sqlCmd.CommandText = sqlQuery;
+                sqlCmd.ExecuteNonQuery();
+            }
+            foreach (ServiceDone serviceDone in serviceDones)
+            {
+                sqlQuery = "Insert INTO serviceDone (rowidServiceForModels,rowidServiceLog) VALUES (" + serviceDone.ServiceForModel.RowId + "," + rowId + ");";
+                sqlCmd = dbConnect.CreateCommand();
+                sqlCmd.CommandText = sqlQuery;
+                sqlCmd.ExecuteNonQuery();
+            }
+            dbConnect.Close();
+            MessageBox.Show("Запись добавлена в журнал.");
+        }
+        #endregion
     }
 }
