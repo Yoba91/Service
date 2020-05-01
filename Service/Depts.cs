@@ -16,16 +16,21 @@ namespace Service
         List<Dept> depts = new List<Dept>();
         Dictionary<int, Dept> comboBoxItems = new Dictionary<int, Dept>();
         bool updateDept = false;
-        public Depts()
+        MainForm form = new MainForm();
+        public Depts(MainForm form)
         {
             InitializeComponent();
             comboBox1.Visible = false;
+            this.form = form;
+            this.Text = "Отдел / заказчик";
         }
-        public Depts(List<Dept> depts)
+        public Depts(List<Dept> depts, MainForm form)
         {
             InitializeComponent();
             foreach (Dept dept in depts)
                 this.depts.Add(dept);
+            this.form = form;
+            this.Text = "Отдел / заказчик";
         }
         public void UpdateDept()
         {
@@ -106,6 +111,13 @@ namespace Service
                 textBox2.Text = dept.Code;
                 textBox3.Text = dept.Description;
             }
+        }
+
+        private void Depts_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            form.SelectAllData();
+            form.InitializeDataFilters();
+            form.ApplyFilters();
         }
     }
 }

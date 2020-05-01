@@ -286,6 +286,8 @@ namespace Service
         {
             dataGridViewServiceLog.Rows.Clear();
             dataGridViewServiceLog.Columns.Clear();
+            dataGridViewServiceLog.Columns.Add("rowid", "rowid");
+            dataGridViewServiceLog.Columns["rowid"].Visible = false;
             dataGridViewServiceLog.Columns.Add("number", "№");
             dataGridViewServiceLog.Columns.Add("inventoryNumber", "I/N");
             dataGridViewServiceLog.Columns.Add("model", "Модель");
@@ -299,15 +301,16 @@ namespace Service
             foreach (ServiceLog releaseLog in releaseLogs)
             {
                 dataGridViewServiceLog.Rows.Add();
-                dataGridViewServiceLog[0, dataGridViewServiceLog.Rows.Count - 1].Value = dataGridViewServiceLog.Rows.Count;
-                dataGridViewServiceLog[1, dataGridViewServiceLog.Rows.Count - 1].Value = releaseLog.Device.InventoryNumber;
-                dataGridViewServiceLog[2, dataGridViewServiceLog.Rows.Count - 1].Value = releaseLog.Device.Model.ShortName;
-                dataGridViewServiceLog[3, dataGridViewServiceLog.Rows.Count - 1].Value = releaseLog.Device.Model.Type.ShortName;
-                dataGridViewServiceLog[4, dataGridViewServiceLog.Rows.Count - 1].Value = releaseLog.Device.SerialNumber;
-                dataGridViewServiceLog[5, dataGridViewServiceLog.Rows.Count - 1].Value = releaseLog.Device.Dept.Code;
-                dataGridViewServiceLog[6, dataGridViewServiceLog.Rows.Count - 1].Value = releaseLog.Device.Status.Name;
-                dataGridViewServiceLog[7, dataGridViewServiceLog.Rows.Count - 1].Value = releaseLog.Date.Value;
-                dataGridViewServiceLog[8, dataGridViewServiceLog.Rows.Count - 1].Value = releaseLog.Repairer.Surname + " " + releaseLog.Repairer.Name + " " + releaseLog.Repairer.Midname;
+                dataGridViewServiceLog[0, dataGridViewServiceLog.Rows.Count - 1].Value = releaseLog.RowId;
+                dataGridViewServiceLog[1, dataGridViewServiceLog.Rows.Count - 1].Value = dataGridViewServiceLog.Rows.Count;
+                dataGridViewServiceLog[2, dataGridViewServiceLog.Rows.Count - 1].Value = releaseLog.Device.InventoryNumber;
+                dataGridViewServiceLog[3, dataGridViewServiceLog.Rows.Count - 1].Value = releaseLog.Device.Model.ShortName;
+                dataGridViewServiceLog[4, dataGridViewServiceLog.Rows.Count - 1].Value = releaseLog.Device.Model.Type.ShortName;
+                dataGridViewServiceLog[5, dataGridViewServiceLog.Rows.Count - 1].Value = releaseLog.Device.SerialNumber;
+                dataGridViewServiceLog[6, dataGridViewServiceLog.Rows.Count - 1].Value = releaseLog.Device.Dept.Code;
+                dataGridViewServiceLog[7, dataGridViewServiceLog.Rows.Count - 1].Value = releaseLog.Device.Status.Name;
+                dataGridViewServiceLog[8, dataGridViewServiceLog.Rows.Count - 1].Value = releaseLog.Date.Value;
+                dataGridViewServiceLog[9, dataGridViewServiceLog.Rows.Count - 1].Value = releaseLog.Repairer.Surname + " " + releaseLog.Repairer.Name + " " + releaseLog.Repairer.Midname;
                 DGVRows.Add(dataGridViewServiceLog.Rows.Count - 1, releaseLog);
             }
 
@@ -653,7 +656,7 @@ namespace Service
         #region Нажать на Сброс результатов
         private void buttonClear_Click(object sender, EventArgs e)
         {
-            dateTimePickerFrom.Value = dateTimePickerFrom.MinDate;
+            dateTimePickerFrom.Value = dateTimePickerFrom.Value = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
             dateTimePickerBefore.Value = DateTime.Today;
             listBoxStatusesFilter.SelectedItems.Clear();
             listBoxRepairersFilter.SelectedItems.Clear();
@@ -767,10 +770,18 @@ namespace Service
                 ServiceLog serviceLog = new ServiceLog();
                 for (int index = 0; index < dataGridViewServiceLog.SelectedRows.Count; index++)
                 {
+                    foreach(ServiceLog log in releaseLogs)
+                    {
+                        if(int.Parse(dataGridViewServiceLog.SelectedRows[index].Cells[0].Value.ToString()) == log.RowId)
+                            db.DeleteServiceLogToDB(log);
+
+                    }
+                    /*
                     if(DGVRows.TryGetValue(dataGridViewServiceLog.Rows.IndexOf(dataGridViewServiceLog.SelectedRows[index]), out serviceLog))
                     {
                         db.DeleteServiceLogToDB(serviceLog);
                     }
+                    */
                 }
                 MessageBox.Show("Запись удалена из журнала.");
                 SelectAllData();
@@ -781,22 +792,124 @@ namespace Service
 
         private void добавитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Depts newDept = new Depts();
+            Depts newDept = new Depts(this);
             newDept.ShowDialog();
         }
 
         private void изменитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Depts newDept = new Depts(depts);
+            Depts newDept = new Depts(depts,this);
             newDept.UpdateDept();
             newDept.ShowDialog();
         }
 
         private void удалитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Depts newDept = new Depts(depts);
+            Depts newDept = new Depts(depts,this);
             newDept.DeleteDept();
             newDept.ShowDialog();
+        }
+
+        private void добавитьToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            TypeModelForm form = new TypeModelForm(this);
+            form.ShowDialog();
+
+        }
+
+        private void изменитьToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            TypeModelForm form = new TypeModelForm(typeModels, this);
+
+            form.UpdateTypeModel();
+            form.ShowDialog();
+        }
+
+        private void удалитьToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            TypeModelForm form = new TypeModelForm(typeModels, this);
+            form.DeleteTypeModel();
+            form.ShowDialog();
+        }
+
+        private void добавитьToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            StatusForm form = new StatusForm(this);
+            form.ShowDialog();
+        }
+
+        private void изменитьToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            StatusForm form = new StatusForm(statuses,this);
+            form.UpdateStatus();
+            form.ShowDialog();
+        }
+
+        private void удалитьToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            StatusForm form = new StatusForm(statuses, this);
+            form.DeleteStatus();
+            form.ShowDialog();
+        }
+
+        private void добавитьToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            ModelForm form = new ModelForm(typeModels,this);
+            form.ShowDialog();
+        }
+
+        private void изменитьToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            ModelForm form = new ModelForm(models,typeModels, this);
+            form.UpdateModel();
+            form.ShowDialog();
+        }
+
+        private void удалитьToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            ModelForm form = new ModelForm(models, typeModels, this);
+            form.DeleteModel();
+            form.ShowDialog();
+        }
+
+        private void добавитьToolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            DeviceForm form = new DeviceForm(models,depts,statuses, this);
+            form.ShowDialog();
+        }
+
+        private void изменитьToolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            DeviceForm form = new DeviceForm(devices, models, depts, statuses, this);
+            form.UpdateDevice();
+            form.ShowDialog();
+        }
+
+        private void удалитьToolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            DeviceForm form = new DeviceForm(devices, models, depts, statuses, this);
+            form.DeleteDevice();
+            form.ShowDialog();
+        }
+
+        private void добавитьToolStripMenuItem5_Click(object sender, EventArgs e)
+        {
+            ParameterForm form = new ParameterForm(this);
+            form.ShowDialog();
+        }
+
+        private void изменитьToolStripMenuItem5_Click(object sender, EventArgs e)
+        {
+            ParameterForm form = new ParameterForm(parameters, this);
+            form.UpdateParameter();
+            form.ShowDialog();
+        }
+
+        private void удалитьToolStripMenuItem5_Click(object sender, EventArgs e)
+        {
+            ParameterForm form = new ParameterForm(parameters, this);
+            form.DeleteParameter();
+            form.ShowDialog();
         }
     }
 }

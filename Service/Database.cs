@@ -540,7 +540,7 @@ namespace Service
         public void DeleteDeptToDB(Dept dept)
         {
             DataTable table = new DataTable();
-            sqlQuery = "Delete FROM dept WHERE rowid=" + dept.RowId + ";";
+            sqlQuery = "PRAGMA foreign_keys = ON; Delete FROM dept WHERE rowid=" + dept.RowId + ";";
             dbConnect.Open();
             if (dbConnect.State != ConnectionState.Open)
             {
@@ -551,6 +551,251 @@ namespace Service
             sqlCmd.ExecuteNonQuery();
             dbConnect.Close();
             MessageBox.Show("Отдел / Заказчик удален.");
+        }
+        #endregion
+
+        #region Добавить тип
+        public void InsertTypeModelToDB(TypeModel typeModel)
+        {
+            sqlQuery = "Insert INTO 'types' (fullName,shortName) VALUES ('" + typeModel.FullName + "','" + typeModel.ShortName + "');";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Добавлен новый тип.");
+        }
+        #endregion
+        #region Изменить тип
+        public void UpdateTypeModelToDB(TypeModel typeModel)
+        {
+            sqlQuery = "Update 'types' Set fullName='" + typeModel.FullName + "',shortName='" + typeModel.ShortName + "' Where rowid=" + typeModel.RowId + ";";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Тип изменен.");
+        }
+        #endregion
+        #region Удалить тип
+        public void DeleteTypeModelToDB(TypeModel typeModel)
+        {
+            sqlQuery = "PRAGMA foreign_keys = ON; Delete FROM 'types' WHERE rowid=" + typeModel.RowId + ";";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Тип удален.");
+        }
+        #endregion
+
+        #region Добавить статус
+        public void InsertStatusToDB(Status status)
+        {
+            sqlQuery = "Insert INTO 'statuses' (name) VALUES ('" + status.Name + "');";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Добавлен новый статус.");
+        }
+        #endregion
+        #region Изменить статус
+        public void UpdateStatusToDB(Status status)
+        {
+            sqlQuery = "Update 'statuses' Set name='" + status.Name + "' Where rowid=" + status.RowId + ";";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Статус изменен.");
+        }
+        #endregion
+        #region Удалить статус
+        public void DeleteStatusToDB(Status status)
+        {
+            sqlQuery = "PRAGMA foreign_keys = ON; Delete FROM 'statuses' WHERE rowid=" + status.RowId + ";";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Статус удален.");
+        }
+        #endregion
+
+        #region Добавить модель
+        public void InsertModelToDB(Model model)
+        {
+            sqlQuery = "Insert INTO 'model' (rowidTypes,fullName,shortName) VALUES (" + model.Type.RowId + ",'" + model.FullName + "','" + model.ShortName + "');";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Добавлена новая модель.");
+        }
+        #endregion
+        #region Изменить модель
+        public void UpdateModelToDB(Model model)
+        {
+            sqlQuery = "Update 'model' Set rowidTypes=" + model.Type.RowId + ",fullName='" + model.FullName + "',shortName='" + model.ShortName + "' Where rowid=" + model.RowId + ";";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Модель изменена.");
+        }
+        #endregion
+        #region Удалить модель
+        public void DeleteModelToDB(Model model)
+        {
+            sqlQuery = "PRAGMA foreign_keys = ON; Delete FROM 'model' WHERE rowid=" + model.RowId + ";";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Модель удалена.");
+        }
+        #endregion
+
+        #region Добавить устройство
+        public void InsertDeviceToDB(Device device)
+        {
+            sqlQuery = "Insert INTO 'devices' (rowidModel,rowidDept,rowidStatus,serialNumber,inventoryNumber) VALUES (" + device.Model.RowId + "," + device.Dept.RowId + "," + device.Status.RowId + ",'" + device.SerialNumber + "','" + device.InventoryNumber + "');";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Добавлено новое устроство.");
+        }
+        #endregion
+        #region Изменить устройство
+        public void UpdateDeviceToDB(Device device)
+        {
+            sqlQuery = "Update 'devices' Set rowidModel=" + device.Model.RowId + ",rowidDept=" + device.Dept.RowId + ",rowidStatus=" + device.Status.RowId + ",serialNumber='" + device.SerialNumber + "',inventoryNumber='" + device.InventoryNumber + "' Where rowid=" + device.RowId + ";";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Устройство изменено.");
+        }
+        #endregion
+        #region Удалить устройство
+        public void DeleteDeviceToDB(Device device)
+        {
+            sqlQuery = "PRAGMA foreign_keys = ON; Delete FROM 'devices' WHERE rowid=" + device.RowId + ";";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Устройство удалено.");
+        }
+        #endregion
+
+        #region Добавить параметр
+        public void InsertParameterToDB(Parameter parameter)
+        {
+            sqlQuery = "Insert INTO 'parameters' (name,unit,'default') VALUES ('" + parameter.Name + "','" + parameter.Unit + "','" + parameter.DefaultValue + "');";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Добавлен новый параметр.");
+        }
+        #endregion
+        #region Изменить параметр
+        public void UpdateParameterToDB(Parameter parameter)
+        {
+            sqlQuery = "Update 'parameters' Set name='" + parameter.Name + "',unit='" + parameter.Unit + "','default'='" + parameter.DefaultValue + "' Where rowid=" + parameter.RowId + ";";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Параметр изменен.");
+        }
+        #endregion
+        #region Удалить параметр
+        public void DeleteParameterToDB(Parameter parameter)
+        {
+            sqlQuery = "PRAGMA foreign_keys = ON; Delete FROM 'parameters' WHERE rowid=" + parameter.RowId + ";";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Параметр удален.");
         }
         #endregion
     }
