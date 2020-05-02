@@ -92,7 +92,9 @@ namespace Service
                     Status status = new Status();
                     if (comboBoxItems.TryGetValue(comboBox1.SelectedIndex, out status))
                     {
-                        db.DeleteStatusToDB(new Status(status.RowId, textBox1.Text));
+                        DialogResult result = MessageBox.Show("Вы уверены, что хотите удалить этот статус?\nЭто повлечет за собой удаление всех устройств с этим статусом и всех записей этих устройств.", "Удаление статуса " + status.Name, MessageBoxButtons.YesNo);
+                        if (result == DialogResult.Yes)
+                            db.DeleteStatusToDB(new Status(status.RowId, textBox1.Text));
                     }
                     else
                         MessageBox.Show("Не удалось удалить статус.");

@@ -243,6 +243,8 @@ namespace Service
     #region Параметры устройста для модели (ParameterForModel)
     public class ParameterForModel
     {
+        public ParameterForModel()
+        { }
         public ParameterForModel(int rowid, Model model, Parameter parameter)
         {
             RowId = rowid;
@@ -304,6 +306,8 @@ namespace Service
     #region Запчасти для модели (SparesForModels)
     public class SparesForModels
     {
+        public SparesForModels()
+        { }
         public SparesForModels(int rowid, Model model, Spares spare)
         {
             RowId = rowid;
@@ -364,6 +368,8 @@ namespace Service
     #region Работы для модели (ServiceForModel)
     public class ServiceForModel
     {
+        public ServiceForModel()
+        { }
         public ServiceForModel(int rowid, Model model, Service service)
         {
             RowId = rowid;

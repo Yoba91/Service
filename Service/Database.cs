@@ -502,6 +502,105 @@ namespace Service
         }
         #endregion
 
+        #region Привязать параметр
+        public void InsertParametersForModels(ParameterForModel parameter)
+        {
+            sqlQuery = "Insert INTO 'parametersForModels' (rowidModel,rowidParameters) VALUES (" + parameter.Model.RowId + "," + parameter.Parameter.RowId + ");";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Параметр привязан.");
+        }
+        #endregion
+        #region Отвязать параметр
+        public void DeleteParametersForModels(ParameterForModel parameter)
+        {
+            sqlQuery = "PRAGMA foreign_keys = ON; Delete FROM 'parametersForModels' WHERE rowid=" + parameter.RowId + ";";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Параметр отвязан.");
+        }
+        #endregion
+
+        #region Привязать запчасти
+        public void InsertSparesForModels(SparesForModels spares)
+        {
+            sqlQuery = "Insert INTO 'sparesForModels' (rowidModel,rowidSpares) VALUES (" + spares.Model.RowId + "," + spares.Spare.RowId + ");";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Запчасть привязана.");
+        }
+        #endregion
+        #region Отвязать запчасти
+        public void DeleteSparesForModels(SparesForModels spares)
+        {
+            sqlQuery = "PRAGMA foreign_keys = ON; Delete FROM 'sparesForModels' WHERE rowid=" + spares.RowId + ";";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Запчасть отвязана.");
+        }
+        #endregion
+
+        #region Привязать виды работ
+        public void InsertServicesForModels(ServiceForModel services)
+        {
+            sqlQuery = "Insert INTO 'serviceForModels' (rowidModel,rowidService) VALUES (" + services.Model.RowId + "," + services.Service.RowId + ");";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Вид работы привязана.");
+        }
+        #endregion
+        #region Отвязать вид работы
+        public void DeleteServicesForModels(ServiceForModel services)
+        {
+            sqlQuery = "PRAGMA foreign_keys = ON; Delete FROM 'serviceForModels' WHERE rowid=" + services.RowId + ";";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Вид работы отвязана.");
+        }
+        #endregion
+
         #region Добавить отдел
         public void InsertDeptToDB(Dept dept)
         {
@@ -796,6 +895,104 @@ namespace Service
             sqlCmd.ExecuteNonQuery();
             dbConnect.Close();
             MessageBox.Show("Параметр удален.");
+        }
+        #endregion
+
+        #region Добавить запчасть
+        public void InsertSparesToDB(Spares spare)
+        {
+            sqlQuery = "Insert INTO 'spares' (name,description) VALUES ('" + spare.Name + "','" + spare.Description + "');";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Добавлена новая запчасть.");
+        }
+        #endregion
+        #region Изменить запчасть
+        public void UpdateSparesToDB(Spares spare)
+        {
+            sqlQuery = "Update 'spares' Set name='" + spare.Name + "',description='" + spare.Description + "' Where rowid=" + spare.RowId + ";";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Запчасть изменена.");
+        }
+        #endregion
+        #region Удалить запчасть
+        public void DeleteSparesToDB(Spares spare)
+        {
+            sqlQuery = "PRAGMA foreign_keys = ON; Delete FROM 'spares' WHERE rowid=" + spare.RowId + ";";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Запчасть удалена.");
+        }
+        #endregion
+
+        #region Добавить вид работы
+        public void InsertServiceToDB(Service service)
+        {
+            sqlQuery = "Insert INTO 'service' (fullName,shortName,description) VALUES ('" + service.FullName + "','" + service.ShortName + "','" + service.Description + "');";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Добавлен новый вид работы.");
+        }
+        #endregion
+        #region Изменить вид работы
+        public void UpdateServiceToDB(Service service)
+        {
+            sqlQuery = "Update 'service' Set fullName='" + service.FullName + "',shortName='" + service.ShortName + "',description='" + service.Description + "' Where rowid=" + service.RowId + ";";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Вид работы изменен.");
+        }
+        #endregion
+        #region Удалить вид работы
+        public void DeleteServiceToDB(Service service)
+        {
+            sqlQuery = "PRAGMA foreign_keys = ON; Delete FROM 'service' WHERE rowid=" + service.RowId + ";";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Вид работы удален.");
         }
         #endregion
     }

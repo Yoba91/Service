@@ -15,7 +15,7 @@ namespace Service
         Database db = new Database();
         List<Parameter> parameters = new List<Parameter>();
         Dictionary<int, Parameter> comboBoxItems = new Dictionary<int, Parameter>();
-        bool updateDevice = false;
+        bool updateParameter = false;
         MainForm form = new MainForm();
         public ParameterForm(MainForm form)
         {
@@ -34,7 +34,7 @@ namespace Service
         }
         public void UpdateParameter()
         {
-            updateDevice = true;
+            updateParameter = true;
             foreach (Parameter parameter in parameters)
             {
                 comboBox1.Items.Add(parameter.Name);
@@ -73,7 +73,7 @@ namespace Service
             }
             else
             {
-                if (updateDevice)
+                if (updateParameter)
                 {
                     if (textBox1.TextLength == 0)
                     {

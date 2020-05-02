@@ -41,7 +41,8 @@ namespace Service
                 comboBox2.Items.Add(typeModel.FullName);
                 this.typeModels.Add(comboBox2.Items.Count - 1, typeModel);
             }
-            comboBox2.SelectedIndex = 0;
+            if (comboBox2.Items.Count > 0)
+                comboBox2.SelectedIndex = 0;
             this.form = form;
             this.Text = "Модель";
         }
@@ -105,7 +106,7 @@ namespace Service
                             }
                         }
                         else
-                            MessageBox.Show("Не удалось изменить статус.");
+                            MessageBox.Show("Не удалось изменить модель.");
                     }
                 }
                 else
@@ -122,7 +123,7 @@ namespace Service
                         }
                     }
                     else
-                        MessageBox.Show("Не удалось изменить статус.");
+                        MessageBox.Show("Не удалось удалить модель.");
                 }
             }
         }

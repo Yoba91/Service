@@ -767,26 +767,24 @@ namespace Service
         {
             if(dataGridViewServiceLog.SelectedRows.Count > 0)
             {
-                ServiceLog serviceLog = new ServiceLog();
-                for (int index = 0; index < dataGridViewServiceLog.SelectedRows.Count; index++)
+                DialogResult result = MessageBox.Show("Вы уверены, что хотите удалить эти записи?", "Удаление записи", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
                 {
-                    foreach(ServiceLog log in releaseLogs)
+                    ServiceLog serviceLog = new ServiceLog();
+                    for (int index = 0; index < dataGridViewServiceLog.SelectedRows.Count; index++)
                     {
-                        if(int.Parse(dataGridViewServiceLog.SelectedRows[index].Cells[0].Value.ToString()) == log.RowId)
-                            db.DeleteServiceLogToDB(log);
+                        foreach (ServiceLog log in releaseLogs)
+                        {
+                            if (int.Parse(dataGridViewServiceLog.SelectedRows[index].Cells[0].Value.ToString()) == log.RowId)
+                                db.DeleteServiceLogToDB(log);
 
+                        }
                     }
-                    /*
-                    if(DGVRows.TryGetValue(dataGridViewServiceLog.Rows.IndexOf(dataGridViewServiceLog.SelectedRows[index]), out serviceLog))
-                    {
-                        db.DeleteServiceLogToDB(serviceLog);
-                    }
-                    */
+                    MessageBox.Show("Запись удалена из журнала.");
+                    SelectAllData();
+                    InitializeDataFilters();
+                    ApplyFilters();
                 }
-                MessageBox.Show("Запись удалена из журнала.");
-                SelectAllData();
-                InitializeDataFilters();
-                ApplyFilters();
             }
         }
 
@@ -910,6 +908,64 @@ namespace Service
             ParameterForm form = new ParameterForm(parameters, this);
             form.DeleteParameter();
             form.ShowDialog();
+        }
+
+        private void добавитьToolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+            SparesForm form = new SparesForm(this);
+            form.ShowDialog();
+        }
+
+        private void изменитьToolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+            SparesForm form = new SparesForm(spares,this);
+            form.UpdateSpares();
+            form.ShowDialog();
+        }
+
+        private void удалитьToolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+            SparesForm form = new SparesForm(spares, this);
+            form.DeleteSpares();
+            form.ShowDialog();
+        }
+
+        private void добавитьToolStripMenuItem7_Click(object sender, EventArgs e)
+        {
+            ServiceForm form = new ServiceForm(this);
+            form.ShowDialog();
+        }
+
+        private void изменитьToolStripMenuItem7_Click(object sender, EventArgs e)
+        {
+            ServiceForm form = new ServiceForm(services,this);
+            form.UpdateService();
+            form.ShowDialog();
+        }
+
+        private void удалитьToolStripMenuItem7_Click(object sender, EventArgs e)
+        {
+            ServiceForm form = new ServiceForm(services, this);
+            form.DeleteService();
+            form.ShowDialog();
+        }
+
+        private void привязатьКМоделиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConnectionForm conForm = new ConnectionForm(this, models, parameters, parametersForModels);
+            conForm.ShowDialog();
+        }
+
+        private void привязатьКМоделиToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ConnectionForm conForm = new ConnectionForm(this, models, spares, sparesForModels);
+            conForm.ShowDialog();
+        }
+
+        private void привязатьКМоделиToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            ConnectionForm conForm = new ConnectionForm(this, models, services, servicesForModels);
+            conForm.ShowDialog();
         }
     }
 }

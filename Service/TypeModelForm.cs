@@ -94,7 +94,9 @@ namespace Service
                     TypeModel typeModel = new TypeModel();
                     if (comboBoxItems.TryGetValue(comboBox1.SelectedIndex, out typeModel))
                     {
-                        db.DeleteTypeModelToDB(new TypeModel(typeModel.RowId, textBox1.Text, textBox2.Text));
+                        DialogResult result = MessageBox.Show("Вы уверены, что хотите удалить этот тип устройств?\nЭто повлечет за собой удаление всех моделей и устройств этого типа, включая все записи ремонтов этих устройств.", "Удаление типа " + typeModel.FullName, MessageBoxButtons.YesNo);
+                        if (result == DialogResult.Yes)
+                            db.DeleteTypeModelToDB(new TypeModel(typeModel.RowId, textBox1.Text, textBox2.Text));
                     }
                     else
                         MessageBox.Show("Не удалось удалить тип.");

@@ -94,7 +94,9 @@ namespace Service
                     Dept dept = new Dept();
                     if (comboBoxItems.TryGetValue(comboBox1.SelectedIndex, out dept))
                     {
-                        db.DeleteDeptToDB(new Dept(dept.RowId, textBox1.Text, textBox2.Text, textBox3.Text));
+                        DialogResult result = MessageBox.Show("Вы уверены, что хотите удалить этот отдел/заказчика?\nЭто повлечет за собой удаление всех устройств этого отдела/заказчика и всех записей ремонтов этих устройств.", "Удаление отдела/заказчика " + dept.Name, MessageBoxButtons.YesNo);
+                        if (result == DialogResult.Yes)
+                            db.DeleteDeptToDB(new Dept(dept.RowId, textBox1.Text, textBox2.Text, textBox3.Text));
                     }
                     else
                         MessageBox.Show("Не удалось удалить отдел.");

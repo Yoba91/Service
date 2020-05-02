@@ -39,14 +39,14 @@
             this.добавитьToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.изменитьToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.модельУстройстваToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.добавитьToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.изменитьToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.удалитьToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.статусМоделиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.добавитьToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.изменитьToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.модельУстройстваToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.добавитьToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.изменитьToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалитьToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.устройствоToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.добавитьToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.изменитьToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
@@ -190,7 +190,7 @@
             // 
             this.добавитьToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
             this.добавитьToolStripMenuItem1.Name = "добавитьToolStripMenuItem1";
-            this.добавитьToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.добавитьToolStripMenuItem1.Size = new System.Drawing.Size(142, 22);
             this.добавитьToolStripMenuItem1.Text = "Добавить";
             this.добавитьToolStripMenuItem1.Click += new System.EventHandler(this.добавитьToolStripMenuItem1_Click);
             // 
@@ -198,7 +198,7 @@
             // 
             this.изменитьToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
             this.изменитьToolStripMenuItem1.Name = "изменитьToolStripMenuItem1";
-            this.изменитьToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.изменитьToolStripMenuItem1.Size = new System.Drawing.Size(142, 22);
             this.изменитьToolStripMenuItem1.Text = "Изменить";
             this.изменитьToolStripMenuItem1.Click += new System.EventHandler(this.изменитьToolStripMenuItem1_Click);
             // 
@@ -206,44 +206,9 @@
             // 
             this.удалитьToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
             this.удалитьToolStripMenuItem1.Name = "удалитьToolStripMenuItem1";
-            this.удалитьToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.удалитьToolStripMenuItem1.Size = new System.Drawing.Size(142, 22);
             this.удалитьToolStripMenuItem1.Text = "Удалить";
             this.удалитьToolStripMenuItem1.Click += new System.EventHandler(this.удалитьToolStripMenuItem1_Click);
-            // 
-            // модельУстройстваToolStripMenuItem
-            // 
-            this.модельУстройстваToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
-            this.модельУстройстваToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.добавитьToolStripMenuItem2,
-            this.изменитьToolStripMenuItem2,
-            this.удалитьToolStripMenuItem2});
-            this.модельУстройстваToolStripMenuItem.Name = "модельУстройстваToolStripMenuItem";
-            this.модельУстройстваToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
-            this.модельУстройстваToolStripMenuItem.Text = "Модель устройства";
-            // 
-            // добавитьToolStripMenuItem2
-            // 
-            this.добавитьToolStripMenuItem2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
-            this.добавитьToolStripMenuItem2.Name = "добавитьToolStripMenuItem2";
-            this.добавитьToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            this.добавитьToolStripMenuItem2.Text = "Добавить";
-            this.добавитьToolStripMenuItem2.Click += new System.EventHandler(this.добавитьToolStripMenuItem2_Click);
-            // 
-            // изменитьToolStripMenuItem2
-            // 
-            this.изменитьToolStripMenuItem2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
-            this.изменитьToolStripMenuItem2.Name = "изменитьToolStripMenuItem2";
-            this.изменитьToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            this.изменитьToolStripMenuItem2.Text = "Изменить";
-            this.изменитьToolStripMenuItem2.Click += new System.EventHandler(this.изменитьToolStripMenuItem2_Click);
-            // 
-            // удалитьToolStripMenuItem2
-            // 
-            this.удалитьToolStripMenuItem2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
-            this.удалитьToolStripMenuItem2.Name = "удалитьToolStripMenuItem2";
-            this.удалитьToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            this.удалитьToolStripMenuItem2.Text = "Удалить";
-            this.удалитьToolStripMenuItem2.Click += new System.EventHandler(this.удалитьToolStripMenuItem2_Click);
             // 
             // статусМоделиToolStripMenuItem
             // 
@@ -260,7 +225,7 @@
             // 
             this.добавитьToolStripMenuItem3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
             this.добавитьToolStripMenuItem3.Name = "добавитьToolStripMenuItem3";
-            this.добавитьToolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.добавитьToolStripMenuItem3.Size = new System.Drawing.Size(142, 22);
             this.добавитьToolStripMenuItem3.Text = "Добавить";
             this.добавитьToolStripMenuItem3.Click += new System.EventHandler(this.добавитьToolStripMenuItem3_Click);
             // 
@@ -268,7 +233,7 @@
             // 
             this.изменитьToolStripMenuItem3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
             this.изменитьToolStripMenuItem3.Name = "изменитьToolStripMenuItem3";
-            this.изменитьToolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.изменитьToolStripMenuItem3.Size = new System.Drawing.Size(142, 22);
             this.изменитьToolStripMenuItem3.Text = "Изменить";
             this.изменитьToolStripMenuItem3.Click += new System.EventHandler(this.изменитьToolStripMenuItem3_Click);
             // 
@@ -276,9 +241,44 @@
             // 
             this.удалитьToolStripMenuItem3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
             this.удалитьToolStripMenuItem3.Name = "удалитьToolStripMenuItem3";
-            this.удалитьToolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.удалитьToolStripMenuItem3.Size = new System.Drawing.Size(142, 22);
             this.удалитьToolStripMenuItem3.Text = "Удалить";
             this.удалитьToolStripMenuItem3.Click += new System.EventHandler(this.удалитьToolStripMenuItem3_Click);
+            // 
+            // модельУстройстваToolStripMenuItem
+            // 
+            this.модельУстройстваToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
+            this.модельУстройстваToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.добавитьToolStripMenuItem2,
+            this.изменитьToolStripMenuItem2,
+            this.удалитьToolStripMenuItem2});
+            this.модельУстройстваToolStripMenuItem.Name = "модельУстройстваToolStripMenuItem";
+            this.модельУстройстваToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.модельУстройстваToolStripMenuItem.Text = "Модель устройства";
+            // 
+            // добавитьToolStripMenuItem2
+            // 
+            this.добавитьToolStripMenuItem2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
+            this.добавитьToolStripMenuItem2.Name = "добавитьToolStripMenuItem2";
+            this.добавитьToolStripMenuItem2.Size = new System.Drawing.Size(142, 22);
+            this.добавитьToolStripMenuItem2.Text = "Добавить";
+            this.добавитьToolStripMenuItem2.Click += new System.EventHandler(this.добавитьToolStripMenuItem2_Click);
+            // 
+            // изменитьToolStripMenuItem2
+            // 
+            this.изменитьToolStripMenuItem2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
+            this.изменитьToolStripMenuItem2.Name = "изменитьToolStripMenuItem2";
+            this.изменитьToolStripMenuItem2.Size = new System.Drawing.Size(142, 22);
+            this.изменитьToolStripMenuItem2.Text = "Изменить";
+            this.изменитьToolStripMenuItem2.Click += new System.EventHandler(this.изменитьToolStripMenuItem2_Click);
+            // 
+            // удалитьToolStripMenuItem2
+            // 
+            this.удалитьToolStripMenuItem2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
+            this.удалитьToolStripMenuItem2.Name = "удалитьToolStripMenuItem2";
+            this.удалитьToolStripMenuItem2.Size = new System.Drawing.Size(142, 22);
+            this.удалитьToolStripMenuItem2.Text = "Удалить";
+            this.удалитьToolStripMenuItem2.Click += new System.EventHandler(this.удалитьToolStripMenuItem2_Click);
             // 
             // устройствоToolStripMenuItem
             // 
@@ -295,7 +295,7 @@
             // 
             this.добавитьToolStripMenuItem4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
             this.добавитьToolStripMenuItem4.Name = "добавитьToolStripMenuItem4";
-            this.добавитьToolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
+            this.добавитьToolStripMenuItem4.Size = new System.Drawing.Size(142, 22);
             this.добавитьToolStripMenuItem4.Text = "Добавить";
             this.добавитьToolStripMenuItem4.Click += new System.EventHandler(this.добавитьToolStripMenuItem4_Click);
             // 
@@ -303,7 +303,7 @@
             // 
             this.изменитьToolStripMenuItem4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
             this.изменитьToolStripMenuItem4.Name = "изменитьToolStripMenuItem4";
-            this.изменитьToolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
+            this.изменитьToolStripMenuItem4.Size = new System.Drawing.Size(142, 22);
             this.изменитьToolStripMenuItem4.Text = "Изменить";
             this.изменитьToolStripMenuItem4.Click += new System.EventHandler(this.изменитьToolStripMenuItem4_Click);
             // 
@@ -311,7 +311,7 @@
             // 
             this.удалитьToolStripMenuItem4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
             this.удалитьToolStripMenuItem4.Name = "удалитьToolStripMenuItem4";
-            this.удалитьToolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
+            this.удалитьToolStripMenuItem4.Size = new System.Drawing.Size(142, 22);
             this.удалитьToolStripMenuItem4.Text = "Удалить";
             this.удалитьToolStripMenuItem4.Click += new System.EventHandler(this.удалитьToolStripMenuItem4_Click);
             // 
@@ -357,6 +357,7 @@
             this.привязатьКМоделиToolStripMenuItem.Name = "привязатьКМоделиToolStripMenuItem";
             this.привязатьКМоделиToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
             this.привязатьКМоделиToolStripMenuItem.Text = "Привязать к модели";
+            this.привязатьКМоделиToolStripMenuItem.Click += new System.EventHandler(this.привязатьКМоделиToolStripMenuItem_Click);
             // 
             // запчастиToolStripMenuItem
             // 
@@ -376,6 +377,7 @@
             this.добавитьToolStripMenuItem6.Name = "добавитьToolStripMenuItem6";
             this.добавитьToolStripMenuItem6.Size = new System.Drawing.Size(215, 22);
             this.добавитьToolStripMenuItem6.Text = "Добавить";
+            this.добавитьToolStripMenuItem6.Click += new System.EventHandler(this.добавитьToolStripMenuItem6_Click);
             // 
             // изменитьToolStripMenuItem6
             // 
@@ -383,6 +385,7 @@
             this.изменитьToolStripMenuItem6.Name = "изменитьToolStripMenuItem6";
             this.изменитьToolStripMenuItem6.Size = new System.Drawing.Size(215, 22);
             this.изменитьToolStripMenuItem6.Text = "Изменить";
+            this.изменитьToolStripMenuItem6.Click += new System.EventHandler(this.изменитьToolStripMenuItem6_Click);
             // 
             // удалитьToolStripMenuItem6
             // 
@@ -390,6 +393,7 @@
             this.удалитьToolStripMenuItem6.Name = "удалитьToolStripMenuItem6";
             this.удалитьToolStripMenuItem6.Size = new System.Drawing.Size(215, 22);
             this.удалитьToolStripMenuItem6.Text = "Удалить";
+            this.удалитьToolStripMenuItem6.Click += new System.EventHandler(this.удалитьToolStripMenuItem6_Click);
             // 
             // привязатьКМоделиToolStripMenuItem1
             // 
@@ -397,6 +401,7 @@
             this.привязатьКМоделиToolStripMenuItem1.Name = "привязатьКМоделиToolStripMenuItem1";
             this.привязатьКМоделиToolStripMenuItem1.Size = new System.Drawing.Size(215, 22);
             this.привязатьКМоделиToolStripMenuItem1.Text = "Привязать к модели";
+            this.привязатьКМоделиToolStripMenuItem1.Click += new System.EventHandler(this.привязатьКМоделиToolStripMenuItem1_Click);
             // 
             // видыРаботыToolStripMenuItem
             // 
@@ -416,6 +421,7 @@
             this.добавитьToolStripMenuItem7.Name = "добавитьToolStripMenuItem7";
             this.добавитьToolStripMenuItem7.Size = new System.Drawing.Size(215, 22);
             this.добавитьToolStripMenuItem7.Text = "Добавить";
+            this.добавитьToolStripMenuItem7.Click += new System.EventHandler(this.добавитьToolStripMenuItem7_Click);
             // 
             // изменитьToolStripMenuItem7
             // 
@@ -423,6 +429,7 @@
             this.изменитьToolStripMenuItem7.Name = "изменитьToolStripMenuItem7";
             this.изменитьToolStripMenuItem7.Size = new System.Drawing.Size(215, 22);
             this.изменитьToolStripMenuItem7.Text = "Изменить";
+            this.изменитьToolStripMenuItem7.Click += new System.EventHandler(this.изменитьToolStripMenuItem7_Click);
             // 
             // удалитьToolStripMenuItem7
             // 
@@ -430,6 +437,7 @@
             this.удалитьToolStripMenuItem7.Name = "удалитьToolStripMenuItem7";
             this.удалитьToolStripMenuItem7.Size = new System.Drawing.Size(215, 22);
             this.удалитьToolStripMenuItem7.Text = "Удалить";
+            this.удалитьToolStripMenuItem7.Click += new System.EventHandler(this.удалитьToolStripMenuItem7_Click);
             // 
             // привязатьКМоделиToolStripMenuItem2
             // 
@@ -437,6 +445,7 @@
             this.привязатьКМоделиToolStripMenuItem2.Name = "привязатьКМоделиToolStripMenuItem2";
             this.привязатьКМоделиToolStripMenuItem2.Size = new System.Drawing.Size(215, 22);
             this.привязатьКМоделиToolStripMenuItem2.Text = "Привязать к модели";
+            this.привязатьКМоделиToolStripMenuItem2.Click += new System.EventHandler(this.привязатьКМоделиToolStripMenuItem2_Click);
             // 
             // отчетыToolStripMenuItem
             // 

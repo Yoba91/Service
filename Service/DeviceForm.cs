@@ -65,9 +65,12 @@ namespace Service
                 comboBox4.Items.Add(status.Name);
                 this.statuses.Add(comboBox4.Items.Count - 1, status);
             }
-            comboBox2.SelectedIndex = 0;
-            comboBox3.SelectedIndex = 0;
-            comboBox4.SelectedIndex = 0;
+            if (comboBox2.Items.Count > 0)
+                comboBox2.SelectedIndex = 0;
+            if (comboBox3.Items.Count > 0)
+                comboBox3.SelectedIndex = 0;
+            if (comboBox4.Items.Count > 0)
+                comboBox4.SelectedIndex = 0;
             this.form = form;
             this.Text = "Устройство";
         }
