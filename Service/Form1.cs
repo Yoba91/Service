@@ -7,12 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace Service
 {
     public partial class MainForm : Form
     {
         Database db = new Database();
+        Repairer user = new Repairer();
         List<Dept> depts;
         List<Repairer> repairers;
         List<Model> models;
@@ -51,7 +53,7 @@ namespace Service
             dateTimePickerFrom.Value = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
             InitializeDataFilters();
             DataGridViewServiceLogFill();
-            ApplyFilters();
+            ApplyFilters();            
         }
         #region Инициализация данных в поля фильтров
         public void InitializeDataFilters()
@@ -406,6 +408,19 @@ namespace Service
         }
 
         #endregion
+        #region Авторизация
+        public void AutorizarionUser(Repairer user)
+        {
+            this.user = user;
+            menuStrip1.Items["userToolName"].Text = user.Surname + " " + user.Name;
+        }
+        public void RegistrationUser(Repairer user)
+        {
+            repairers.Add(user);
+            AutorizarionUser(user);
+            ApplyFilters();
+        }
+        #endregion
         private void dataGridViewServiceLog_Paint(object sender, PaintEventArgs e)
         {
             panelParameters.Size = new Size(panelParameters.Size.Width, dataGridViewServiceLog.Size.Height);
@@ -759,13 +774,13 @@ namespace Service
 
         private void buttonInsertLog_Click(object sender, EventArgs e)
         {
-            InsertServiceLog newInsertForm = new InsertServiceLog(this);
+            InsertServiceLog newInsertForm = new InsertServiceLog(this, user);
             newInsertForm.ShowDialog();
         }
 
         private void buttonDeleteLog_Click(object sender, EventArgs e)
         {
-            if(dataGridViewServiceLog.SelectedRows.Count > 0)
+            if (dataGridViewServiceLog.SelectedRows.Count > 0)
             {
                 DialogResult result = MessageBox.Show("Вы уверены, что хотите удалить эти записи?", "Удаление записи", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
@@ -787,7 +802,7 @@ namespace Service
                 }
             }
         }
-
+        #region Кнопки меню
         private void добавитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Depts newDept = new Depts(this);
@@ -796,14 +811,14 @@ namespace Service
 
         private void изменитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Depts newDept = new Depts(depts,this);
+            Depts newDept = new Depts(depts, this);
             newDept.UpdateDept();
             newDept.ShowDialog();
         }
 
         private void удалитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Depts newDept = new Depts(depts,this);
+            Depts newDept = new Depts(depts, this);
             newDept.DeleteDept();
             newDept.ShowDialog();
         }
@@ -838,7 +853,7 @@ namespace Service
 
         private void изменитьToolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            StatusForm form = new StatusForm(statuses,this);
+            StatusForm form = new StatusForm(statuses, this);
             form.UpdateStatus();
             form.ShowDialog();
         }
@@ -852,13 +867,13 @@ namespace Service
 
         private void добавитьToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            ModelForm form = new ModelForm(typeModels,this);
+            ModelForm form = new ModelForm(typeModels, this);
             form.ShowDialog();
         }
 
         private void изменитьToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            ModelForm form = new ModelForm(models,typeModels, this);
+            ModelForm form = new ModelForm(models, typeModels, this);
             form.UpdateModel();
             form.ShowDialog();
         }
@@ -872,7 +887,7 @@ namespace Service
 
         private void добавитьToolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            DeviceForm form = new DeviceForm(models,depts,statuses, this);
+            DeviceForm form = new DeviceForm(models, depts, statuses, this);
             form.ShowDialog();
         }
 
@@ -918,7 +933,7 @@ namespace Service
 
         private void изменитьToolStripMenuItem6_Click(object sender, EventArgs e)
         {
-            SparesForm form = new SparesForm(spares,this);
+            SparesForm form = new SparesForm(spares, this);
             form.UpdateSpares();
             form.ShowDialog();
         }
@@ -938,7 +953,7 @@ namespace Service
 
         private void изменитьToolStripMenuItem7_Click(object sender, EventArgs e)
         {
-            ServiceForm form = new ServiceForm(services,this);
+            ServiceForm form = new ServiceForm(services, this);
             form.UpdateService();
             form.ShowDialog();
         }
@@ -966,6 +981,172 @@ namespace Service
         {
             ConnectionForm conForm = new ConnectionForm(this, models, services, servicesForModels);
             conForm.ShowDialog();
+        }
+        #endregion
+
+        private void полныйToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int exCount = 0;
+            Excel.Application excelApp = new Excel.Application();
+            Excel.Workbook workBook;
+            Excel.Worksheet workSheet;
+            workBook = excelApp.Workbooks.Add();
+            workSheet = (Excel.Worksheet)workBook.Worksheets[1];
+            workSheet.Name = "Отчет с " + dateTimePickerFrom.Value.Day + "." + dateTimePickerFrom.Value.Month.ToString() + "." + dateTimePickerFrom.Value.Year + " по " + dateTimePickerBefore.Value.Day + "." + dateTimePickerBefore.Value.Month.ToString() + "." + dateTimePickerBefore.Value.Year;
+            foreach (TypeModel type in typeModelFilters.Values)
+            {
+                workSheet.Cells[1, 1] = "№";
+                workSheet.Cells[1, 2] = "Инв.номер";
+                workSheet.Cells[1, 3] = "Серийный номер";
+                workSheet.Cells[1, 4] = "Модель";
+                workSheet.Cells[1, 5] = "Отдел/Склад";
+                workSheet.Cells[1, 6] = "Запчасти";
+                workSheet.Cells[1, 7] = "Проделанные работы";
+                workSheet.Cells[1, 8] = "Параметры";
+                exCount++;
+                for (int index = 0; index < releaseLogs.Count; index++)
+                {
+                    workSheet.Cells[index + 2, 1] = index + 1;
+                    workSheet.Cells[index + 2, 2] = releaseLogs[index].Device.InventoryNumber;
+                    workSheet.Cells[index + 2, 3] = releaseLogs[index].Device.SerialNumber;
+                    workSheet.Cells[index + 2, 4] = releaseLogs[index].Device.Model.FullName + " (" + releaseLogs[index].Device.Model.Type.FullName + ")";
+                    workSheet.Cells[index + 2, 5] = releaseLogs[index].Device.Dept.Code;
+                    String sparesStr = "";
+                    foreach (SparesUsed spare in sparesUseds)
+                    {
+                        if (spare.ServiceLog == releaseLogs[index])
+                            sparesStr = sparesStr + spare.SpareForModel.Spare.Name + ", ";
+                    }
+                    workSheet.Cells[index + 2, 6] = sparesStr;
+                    String serviceStr = "";
+                    foreach (ServiceDone service in serviceDones)
+                    {
+                        if (service.ServiceLog == releaseLogs[index])
+                            serviceStr = serviceStr + service.ServiceForModel.Service.FullName + ", ";
+                    }
+                    workSheet.Cells[index + 2, 7] = serviceStr;
+                    String paramStr = "";
+                    foreach (ParametersValues param in parametersValues)
+                    {
+                        if (param.ServiceLog == releaseLogs[index])
+                            paramStr = paramStr + param.ParameterForModel.Parameter.Name + " " + param.Value + ", ";
+                    }
+                    workSheet.Cells[index + 2, 8] = paramStr;
+                    exCount++;
+                }
+                Excel.Range headerRange = workSheet.Range[workSheet.Cells[1, 1], workSheet.Cells[1, 8]];
+                headerRange.Interior.Color = ColorTranslator.ToOle(Color.FromArgb(198, 224, 180));
+                Excel.Range range = workSheet.Range[workSheet.Cells[1, 1], workSheet.Cells[releaseLogs.Count + 1, 8]];
+                range.Borders.get_Item(Excel.XlBordersIndex.xlEdgeBottom).LineStyle = Excel.XlLineStyle.xlContinuous;
+                range.Borders.get_Item(Excel.XlBordersIndex.xlEdgeRight).LineStyle = Excel.XlLineStyle.xlContinuous;
+                range.Borders.get_Item(Excel.XlBordersIndex.xlInsideHorizontal).LineStyle = Excel.XlLineStyle.xlContinuous;
+                range.Borders.get_Item(Excel.XlBordersIndex.xlInsideVertical).LineStyle = Excel.XlLineStyle.xlContinuous;
+                range.Borders.get_Item(Excel.XlBordersIndex.xlEdgeTop).LineStyle = Excel.XlLineStyle.xlContinuous;
+                range.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                range.HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
+                range.EntireColumn.AutoFit();
+                range.EntireRow.AutoFit();
+            }
+            excelApp.Visible = true;
+            excelApp.UserControl = true;
+        }
+
+        private void краткийToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int exCount = 2;
+            Excel.Application excelApp = new Excel.Application();
+            Excel.Workbook workBook;
+            Excel.Worksheet workSheet;
+            workBook = excelApp.Workbooks.Add();
+            workSheet = (Excel.Worksheet)workBook.Worksheets[1];
+            workSheet.Name = "Отчет с " + dateTimePickerFrom.Value.Day + "." + dateTimePickerFrom.Value.Month.ToString() + "." + dateTimePickerFrom.Value.Year + " по " + dateTimePickerBefore.Value.Day + "." + dateTimePickerBefore.Value.Month.ToString() + "." + dateTimePickerBefore.Value.Year;
+
+            Dictionary<Dept, Dictionary<Model, int>> deptModelCounter = new Dictionary<Dept, Dictionary<Model, int>>();
+
+            foreach (Dept dept in deptFilters.Values)
+            {
+                foreach (ServiceLog log in releaseLogs)
+                {
+                    Dictionary<Model, int> temp = new Dictionary<Model, int>();
+                    if (deptModelCounter.TryGetValue(dept, out temp))
+                    { }
+                    if (temp == null && dept.RowId == log.Device.Dept.RowId)
+                    {
+                        deptModelCounter.Add(dept, new Dictionary<Model, int>());
+                    }
+                }
+            }
+
+            foreach (ServiceLog log in releaseLogs)
+            {
+                Dictionary<Model, int> temp = new Dictionary<Model, int>();
+                if (deptModelCounter.TryGetValue(log.Device.Dept, out temp))
+                {
+                    int cont = -1;
+                    if (temp.TryGetValue(log.Device.Model, out cont))
+                    {
+                        deptModelCounter[log.Device.Dept][log.Device.Model]++;
+                    }
+                    else
+                    {
+                        deptModelCounter[log.Device.Dept].Add(log.Device.Model, 1);
+                    }
+                }
+            }
+
+            int indexCell = 2;
+            Excel.Range contentRange;
+            Excel.Range headerRange2;
+            foreach (Dept dept in deptModelCounter.Keys)
+            {
+                if (indexCell == 2)
+                {
+                    headerRange2 = workSheet.Range[workSheet.Cells[1, 1], workSheet.Cells[1, deptModelCounter.Keys.Count + 1]];
+                    headerRange2.Interior.Color = ColorTranslator.ToOle(Color.FromArgb(198, 224, 180));
+                }
+                workSheet.Cells[1, 1] = "Модели";
+                workSheet.Cells[1, indexCell] = dept.Code;
+                foreach (Model model in modelFilters.Values)
+                {
+                    int count = 0;
+                    if (deptModelCounter[dept].TryGetValue(model, out count))
+                    {
+                        workSheet.Cells[exCount, 1] = model.FullName;
+                        workSheet.Cells[exCount, indexCell] = count;
+                        exCount++;
+                    }
+                }
+                contentRange = workSheet.Range[workSheet.Cells[1, 1], workSheet.Cells[exCount-1, deptModelCounter.Keys.Count + 1]];
+                contentRange.Borders.get_Item(Excel.XlBordersIndex.xlEdgeBottom).LineStyle = Excel.XlLineStyle.xlContinuous;
+                contentRange.Borders.get_Item(Excel.XlBordersIndex.xlEdgeRight).LineStyle = Excel.XlLineStyle.xlContinuous;
+                contentRange.Borders.get_Item(Excel.XlBordersIndex.xlInsideHorizontal).LineStyle = Excel.XlLineStyle.xlContinuous;
+                contentRange.Borders.get_Item(Excel.XlBordersIndex.xlInsideVertical).LineStyle = Excel.XlLineStyle.xlContinuous;
+                contentRange.Borders.get_Item(Excel.XlBordersIndex.xlEdgeTop).LineStyle = Excel.XlLineStyle.xlContinuous;
+                contentRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                contentRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
+                contentRange.EntireColumn.AutoFit();
+                contentRange.EntireRow.AutoFit();
+                indexCell++;
+            }
+
+            excelApp.Visible = true;
+            excelApp.UserControl = true;
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            if (user.RowId == 0)
+            {
+                AutorizationForm form = new AutorizationForm(repairers, this);
+                form.ShowDialog();
+            }
+        }
+
+        private void выходToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            user = new Repairer(0, "", "", "", "");
+            AutorizationForm form = new AutorizationForm(repairers, this);
+            form.ShowDialog();
         }
     }
 }

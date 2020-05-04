@@ -67,7 +67,7 @@
             this.удалитьToolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.привязатьКМоделиToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.отчетыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.пользовательToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.userToolName = new System.Windows.Forms.ToolStripMenuItem();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridViewServiceLog = new System.Windows.Forms.DataGridView();
             this.panelFilters = new System.Windows.Forms.Panel();
@@ -101,6 +101,8 @@
             this.dataGridViewSpares = new System.Windows.Forms.DataGridView();
             this.dataGridViewParameters = new System.Windows.Forms.DataGridView();
             this.buttonParametersSpoiler = new System.Windows.Forms.Button();
+            this.полныйToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.краткийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewServiceLog)).BeginInit();
             this.panelFilters.SuspendLayout();
@@ -117,7 +119,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.администрированиеToolStripMenuItem,
             this.отчетыToolStripMenuItem,
-            this.пользовательToolStripMenuItem});
+            this.userToolName});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1008, 25);
@@ -155,7 +157,7 @@
             // 
             this.добавитьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
             this.добавитьToolStripMenuItem.Name = "добавитьToolStripMenuItem";
-            this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.добавитьToolStripMenuItem.Text = "Добавить";
             this.добавитьToolStripMenuItem.Click += new System.EventHandler(this.добавитьToolStripMenuItem_Click);
             // 
@@ -163,7 +165,7 @@
             // 
             this.изменитьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
             this.изменитьToolStripMenuItem.Name = "изменитьToolStripMenuItem";
-            this.изменитьToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.изменитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.изменитьToolStripMenuItem.Text = "Изменить";
             this.изменитьToolStripMenuItem.Click += new System.EventHandler(this.изменитьToolStripMenuItem_Click);
             // 
@@ -171,7 +173,7 @@
             // 
             this.удалитьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
             this.удалитьToolStripMenuItem.Name = "удалитьToolStripMenuItem";
-            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.удалитьToolStripMenuItem.Text = "Удалить";
             this.удалитьToolStripMenuItem.Click += new System.EventHandler(this.удалитьToolStripMenuItem_Click);
             // 
@@ -449,27 +451,31 @@
             // 
             // отчетыToolStripMenuItem
             // 
+            this.отчетыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.полныйToolStripMenuItem,
+            this.краткийToolStripMenuItem});
             this.отчетыToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.отчетыToolStripMenuItem.Name = "отчетыToolStripMenuItem";
             this.отчетыToolStripMenuItem.Size = new System.Drawing.Size(58, 21);
             this.отчетыToolStripMenuItem.Text = "Отчет";
             // 
-            // пользовательToolStripMenuItem
+            // userToolName
             // 
-            this.пользовательToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.userToolName.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.выходToolStripMenuItem});
-            this.пользовательToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.пользовательToolStripMenuItem.Name = "пользовательToolStripMenuItem";
-            this.пользовательToolStripMenuItem.Size = new System.Drawing.Size(116, 21);
-            this.пользовательToolStripMenuItem.Text = "Пользователь";
+            this.userToolName.ForeColor = System.Drawing.Color.White;
+            this.userToolName.Name = "userToolName";
+            this.userToolName.Size = new System.Drawing.Size(116, 21);
+            this.userToolName.Text = "Пользователь";
             // 
             // выходToolStripMenuItem
             // 
-            this.выходToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(150)))), ((int)(((byte)(47)))));
-            this.выходToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.выходToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
+            this.выходToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.выходToolStripMenuItem.Text = "Выход";
+            this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
             // 
             // dataGridViewServiceLog
             // 
@@ -913,6 +919,22 @@
             this.buttonParametersSpoiler.UseVisualStyleBackColor = false;
             this.buttonParametersSpoiler.Click += new System.EventHandler(this.buttonParametersSpoiler_Click);
             // 
+            // полныйToolStripMenuItem
+            // 
+            this.полныйToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
+            this.полныйToolStripMenuItem.Name = "полныйToolStripMenuItem";
+            this.полныйToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.полныйToolStripMenuItem.Text = "Полный";
+            this.полныйToolStripMenuItem.Click += new System.EventHandler(this.полныйToolStripMenuItem_Click);
+            // 
+            // краткийToolStripMenuItem
+            // 
+            this.краткийToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(251)))), ((int)(((byte)(244)))));
+            this.краткийToolStripMenuItem.Name = "краткийToolStripMenuItem";
+            this.краткийToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.краткийToolStripMenuItem.Text = "Краткий";
+            this.краткийToolStripMenuItem.Click += new System.EventHandler(this.краткийToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -929,6 +951,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Сервисный Центр - ЗАО \"Интернет-магазин Евроопт\"";
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewServiceLog)).EndInit();
@@ -948,7 +971,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem администрированиеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem отчетыToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem пользовательToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem userToolName;
         private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
         private System.Windows.Forms.DataGridView dataGridViewServiceLog;
         private System.Windows.Forms.Panel panelFilters;
@@ -1017,6 +1040,8 @@
         private System.Windows.Forms.ToolStripMenuItem изменитьToolStripMenuItem7;
         private System.Windows.Forms.ToolStripMenuItem удалитьToolStripMenuItem7;
         private System.Windows.Forms.ToolStripMenuItem привязатьКМоделиToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem полныйToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem краткийToolStripMenuItem;
     }
 }
 

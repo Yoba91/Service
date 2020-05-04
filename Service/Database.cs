@@ -430,6 +430,24 @@ namespace Service
         }
         #endregion
 
+        #region Добавить пользователя
+        public void InsertUserToDB(Repairer user)
+        {
+            DataTable table = new DataTable();
+            sqlQuery = "Insert INTO repairer (name,surname,midname,password) VALUES ('" + user.Name + "','" + user.Surname + "','" + user.Midname + "','" + user.Password + "');";
+            dbConnect.Open();
+            if (dbConnect.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет соединения с базой данных!");
+            }
+            sqlCmd = dbConnect.CreateCommand();
+            sqlCmd.CommandText = sqlQuery;
+            sqlCmd.ExecuteNonQuery();
+            dbConnect.Close();
+            MessageBox.Show("Добавлен новый пользователь.");
+        }
+        #endregion
+
         #region Добавить запись в журнил
         public void InsertServiceLogToDB(ServiceLog log, List<ParametersValues> parametersValues, List<SparesUsed> sparesUsed, List<ServiceDone> serviceDones)
         {

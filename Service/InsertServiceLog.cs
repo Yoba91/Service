@@ -32,7 +32,8 @@ namespace Service
         Dictionary<int, Spares> DGVRSpares;
         Dictionary<int, Service> DGVRService;
         MainForm form = new MainForm();
-        public InsertServiceLog(MainForm form)
+        Repairer user = new Repairer();
+        public InsertServiceLog(MainForm form, Repairer user)
         {
             InitializeComponent();
             this.Text = "Добавить запись в журнал";
@@ -47,6 +48,7 @@ namespace Service
             DGVRService = new Dictionary<int, Service>();
             dataGridViewDevicesFill();
             this.form = form;
+            this.user = user;
         }
         #region Получить все данные из базы данных
         public void SelectAllData()
@@ -203,8 +205,7 @@ namespace Service
                     Date date = new Date(dateTimePicker1.Value.ToShortDateString());
                     Repairer repairer = new Repairer();
                     repairer = repairers[0];
-                    //Изменить исполнителя на авторизованного
-                    ServiceLog log = new ServiceLog(0, device, date, repairer);
+                    ServiceLog log = new ServiceLog(0, device, date, user);
                     return log;
                 }
 
